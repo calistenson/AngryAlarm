@@ -1,0 +1,10 @@
+/**
+ * Ciphers.java
+ * Authors: Cali Stenson and Clara Smith
+ * This Method holds all of the cipher functions 
+ * for the code cracker class.
+ */ 
+
+public class Ciphers{
+  
+  
