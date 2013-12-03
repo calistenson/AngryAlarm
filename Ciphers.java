@@ -158,21 +158,8 @@ public class Ciphers{
     
   }
   
-  public String decryptHill(Matrix key, Matrix shiftVal, String message){
-    key = key.inverse();
-    System.out.println(key.getArrayCopy());
-    for(int i=0; i<key.getRowDimension(); i++){
-      for(int j=0; j<key.getColumnDimension(); j++){
-        int fix = (int)key.get(i, j);
-        System.out.println("Fix: " + fix);
-        while(fix < 0){
-            fix += 26;
-            System.out.println("Fix was less than zero" + fix);
-        }
-        fix = fix % 26;
-        key.set(i, j, fix);
-      }
-    }  
+  public String decryptHill(Matrix keyInverse, Matrix shiftVal, String message){
+
     char[] messLets = message.toCharArray();
     int[] charVals = new int[messLets.length];
     String decrypted = "";
@@ -184,7 +171,7 @@ public class Ciphers{
       for(int i=0; i<charVals.length-1; i++){
         double[] charval = {(double)charVals[i], charVals[i+1]};
         Matrix letters = new Matrix(charval, 2);
-        Matrix decrptd = key.times(letters.minus(shiftVal));
+        Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
         newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
         decrypted += (char) newIndex;
         newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
@@ -193,14 +180,14 @@ public class Ciphers{
     }else{
       double[] charval = {(double)charVals[0], -1};
       Matrix letters = new Matrix(charval, 2);
-      Matrix decrptd = key.times(letters.minus(shiftVal));
+      Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
       newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
       decrypted += (char) newIndex;
       for(int i=1; i<charVals.length-1; i++){
         charval[0] = (double)charVals[i];
         charval[1] = charVals[i+1];
         letters = new Matrix(charval, 2);
-        decrptd = (key.times(letters.minus(shiftVal)));
+        decrptd = (keyInverse.times(letters.minus(shiftVal)));
         newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
         decrypted += (char) newIndex;
         newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
@@ -238,6 +225,10 @@ public class Ciphers{
     double[][] shift = new double[2][1];
     Matrix shiftVal = new Matrix(shift);
     System.out.println(c.encryptHill(key, shiftVal, "HI"));
+    k[0][0] = 15;
+    k[0][1] = 8;
+    k[1][0] = 8;
+    k[1][1] = 1;
     System.out.println(c.decryptHill(key, shiftVal, "HE"));
     
 
