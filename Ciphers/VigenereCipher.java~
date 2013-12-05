@@ -1,0 +1,48 @@
+/**
+ * VigenereCipher.java
+ * Authors: Cali Stenson and Clara Smith
+ * Course: Wellesley College CS230-Data Structures 
+ * Semester: Fall 2013
+ * This class is a VigenereCipher object used to 
+ * encrypt and decrypt Vigenere Ciphers
+ */ 
+
+public class VigenereCipher{
+  
+  public VigenereCipher(){};
+  
+   public String encrypt(String keyword, String message){
+    int newIndex;
+    int p = 0; //index of the password added to message char
+    int shiftVal = 0; //shift for the message char
+    String encrypted = "";
+    message = message.toUpperCase();
+    char[] messageLet = message.toCharArray();
+    for(int i=0; i<message.length(); i++){
+      shiftVal = (int) keyword.charAt(p) - 'A';
+      newIndex = messageLet[i] + shiftVal;
+      newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
+      encrypted += (char) newIndex;
+      p = (p+1) % keyword.length();
+    }
+    return encrypted;
+  }
+  
+  public String decrypt(String keyword, String message){
+    int newIndex;
+    int p = 0; //index of the password added to message char
+    int shiftVal = 0; //shift for the message char
+    String decrypted = "";
+    message = message.toUpperCase();
+    char[] messageLet = message.toCharArray();
+    for(int i=0; i<message.length(); i++){
+      shiftVal = (int) keyword.charAt(p) - 'A';
+      newIndex = messageLet[i] - shiftVal;
+      newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
+      decrypted += (char) newIndex;
+      p = (p+1) % keyword.length();
+    }
+    return decrypted;
+  }
+  
+}  

@@ -1,0 +1,48 @@
+/**
+ * AffineCipher.java
+ * Authors: Cali Stenson and Clara Smith
+ * Course: Wellesley College CS230-Data Structures 
+ * Semester: Fall 2013
+ * This class is a AffineCipher object used to 
+ * encrypt and decrypt Affine Ciphers
+ */ 
+
+public class AffineCipher {
+  
+  public AffineCipher() {}
+  
+  /**
+   * NOTE: the keyVal must be relatively prime to 26.
+   */ 
+  public String encrypt(int keyVal, int shiftVal, String message){
+    int newIndex;
+    String encrypted = "";
+    message = message.toUpperCase();
+    char[] messageLet = message.toCharArray();
+    for(int i=0; i<message.length(); i++){
+      newIndex = 'A' + ( (keyVal * (messageLet[i]-'A') + shiftVal) % 26);
+      newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
+      encrypted += (char) newIndex;
+    }
+    return encrypted;
+  }
+  
+  public String decrypt(int keyValInvrse, int shiftVal, String message){
+    int newIndex;
+    String decrypted = "";
+    message = message.toUpperCase();
+    char[] messageLet = message.toCharArray();
+    for(int i=0; i<message.length(); i++){
+      newIndex = 'A' + (keyValInvrse*((messageLet[i] - 'A') - shiftVal)) % 26;
+      newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
+      decrypted += (char) newIndex;
+    }
+    return decrypted;
+  }
+  
+  
+  public static void main(String[] args) {}
+  
+
+  
+}

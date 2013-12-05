@@ -1,0 +1,101 @@
+/**
+ * HillCipher.java
+ * Authors: Cali Stenson and Clara Smith
+ * Course: Wellesley College CS230-Data Structures 
+ * Semester: Fall 2013
+ * This class is a HillCipher object used to 
+ * encrypt and decrypt Hill Ciphers
+ */ 
+
+import Jama.*;
+
+
+public class HillCipher {
+  
+  public HillCipher() {} 
+    
+  public String encrypt(Matrix key, Matrix shiftVal, String message){
+    char[] messLets = message.toCharArray();
+    int[] charVals = new int[messLets.length];
+    String encrypted = "";
+    int newIndex = 0;
+    for(int i=0; i<messLets.length; i++){
+      charVals[i] = messLets[i] - 'A';
+    }
+    if(charVals.length % 2 == 0){
+      for(int i=0; i<charVals.length-1; i++){
+        double[] charval = {(double)charVals[i], charVals[i+1]};
+        Matrix letters = new Matrix(charval, 2);
+        Matrix encrptd = (key.times(letters)).plus(shiftVal);
+        newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
+        encrypted += (char) newIndex;
+        newIndex = 'A' + (int)(encrptd.get(1,0) % 26);
+        encrypted += (char) newIndex;
+      }
+    }else{
+      double[] charval = {(double)charVals[0], -1};
+      Matrix letters = new Matrix(charval, 2);
+      Matrix encrptd = (key.times(letters)).plus(shiftVal);
+      newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
+      encrypted += (char) newIndex;
+      for(int i=1; i<charVals.length-1; i++){
+        charval[0] = (double)charVals[i];
+        charval[1] = charVals[i+1];
+        letters = new Matrix(charval, 2);
+        encrptd = (key.times(letters)).plus(shiftVal);
+        newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
+        encrypted += (char) newIndex;
+        newIndex = 'A' + (int)(encrptd.get(1,0) % 26);
+        encrypted += (char) newIndex;
+      }
+    }
+    
+    return encrypted;
+    
+  }
+  
+  public String decrypt(Matrix keyInverse, Matrix shiftVal, String message){
+
+    char[] messLets = message.toCharArray();
+    int[] charVals = new int[messLets.length];
+    String decrypted = "";
+    int newIndex = 0;
+    for(int i=0; i<messLets.length; i++){
+      charVals[i] = messLets[i] - 'A';
+    }
+    if(charVals.length % 2 == 0){
+      for(int i=0; i<charVals.length-1; i++){
+        double[] charval = {(double)charVals[i], charVals[i+1]};
+        Matrix letters = new Matrix(charval, 2);
+        Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
+        newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
+        decrypted += (char) newIndex;
+        newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
+        decrypted += (char) newIndex;
+      }
+    }else{
+      double[] charval = {(double)charVals[0], -1};
+      Matrix letters = new Matrix(charval, 2);
+      Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
+      newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
+      decrypted += (char) newIndex;
+      for(int i=1; i<charVals.length-1; i++){
+        charval[0] = (double)charVals[i];
+        charval[1] = charVals[i+1];
+        letters = new Matrix(charval, 2);
+        decrptd = (keyInverse.times(letters.minus(shiftVal)));
+        newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
+        decrypted += (char) newIndex;
+        newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
+        decrypted += (char) newIndex;
+      }
+    }
+    
+    return decrypted;
+    
+  }
+  
+  public static void main(String[] args) {}
+  
+  
+}
