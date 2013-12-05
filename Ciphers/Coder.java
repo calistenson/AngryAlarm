@@ -14,7 +14,7 @@
 //bug with the packaging so level isn't compiling.
 package ciphers;
 
-public abstract class Cipher{
+public abstract class Coder{
    
   
   public abstract String encrypt(String message);

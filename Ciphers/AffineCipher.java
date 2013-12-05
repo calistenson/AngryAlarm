@@ -8,7 +8,7 @@
  * encrypt and decrypt Affine Ciphers
  */ 
 
-package Ciphers;
+package ciphers;
 
 public class AffineCipher extends Cipher {
     

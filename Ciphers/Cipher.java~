@@ -11,9 +11,8 @@
  * the Level class for the CodeCracker game.
  */ 
 
-//bug with the packaging not sure how this'll pan out. Got to figure out how to 
-//deal with class duplication errors.
-package Ciphers;
+//bug with the packaging so level isn't compiling.
+package ciphers;
 
 public abstract class Cipher{
    

@@ -8,7 +8,7 @@
  * encrypt and decrypt Vigenere Ciphers
  */ 
 
-package Ciphers;
+package ciphers;
 
 public class VigenereCipher extends Cipher{
   

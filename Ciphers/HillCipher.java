@@ -16,7 +16,7 @@
  * game's purposes. 
  */ 
 
-package Ciphers;
+package ciphers;
 import Jama.*;
 
 

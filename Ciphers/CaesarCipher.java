@@ -8,7 +8,7 @@
  * encrypt and decrypt Caesar Ciphers
  */ 
 
-package Ciphers;
+package ciphers;
 
 public class CaesarCipher extends Cipher{
   
