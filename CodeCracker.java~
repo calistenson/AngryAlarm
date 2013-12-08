@@ -1,0 +1,37 @@
+/**
+ * CodeCracker.java
+ * Authors: Cali Stenson and Clara Smith
+ * Date: December 6, 2013
+ * Course: Wellesley College CS230-Data Structures 
+ * Semester: Fall 2013
+ * This class creates and operates the game itself using
+ * the ciphers package and the level class for construction.
+ */
+
+import java.util.*;
+
+public class CodeCracker {
+  
+  Graph<Level> levels;
+  HashMap codes;
+  Level current;
+  
+  public CodeCracker(Graph<Level> gameGraph) { 
+    levels = gameGraph;
+    codes = constructMap();
+    
+  }
+  
+  private HashMap constructMap(){
+    Iterator<Level> listLevs = levels.iterator();
+    while(listLevs.hasNext()){
+      Level curr = listLevs.next();
+      codes.put(curr.getMessage, curr.getCipher
+  
+  public static void main(String[] args) { 
+    
+  }
+  
+  /* ADD YOUR CODE HERE */
+  
+}

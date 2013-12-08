@@ -18,6 +18,7 @@ public class Level {
    * Instance Variables 
    */ 
   private Cipher cipherType;
+  private String message;
   private File storyLine;
   
   /**
@@ -30,9 +31,10 @@ public class Level {
    * @param c Cipher
    * @param s File
    */ 
-  public Level(Cipher c, File s) { 
+  public Level(Cipher c, File s, String mess) { 
     cipherType = c;
     storyLine = s;  
+    message = mess;
   }
   
   
@@ -40,7 +42,7 @@ public class Level {
    * Getter method 
    * @return Cipher
    */ 
-  public Cipher getCipherType(){
+  public Cipher getCipher(){
     return cipherType;
   }
   
@@ -48,8 +50,24 @@ public class Level {
    * Setter method
    * @param c Cipher
    */ 
-  public void setCipherType(Cipher c){
+  public void setCipher(Cipher c){
     cipherType = c;
+  }
+  
+  /**
+   * Getter method 
+   * @return String
+   */ 
+  public String getMessage(){
+    return message;
+  }
+  
+  /**
+   * Setter method
+   * @param mess String
+   */ 
+  public void setMessage(String mess){
+    message = mess;
   }
   
   /**

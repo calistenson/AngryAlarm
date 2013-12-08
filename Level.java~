@@ -9,7 +9,7 @@
  * information to be accessed in the CodeCracker class.
  */
 
-import ciphers.*;
+import ciphers.Cipher;
 import java.io.*;
 
 public class Level {
