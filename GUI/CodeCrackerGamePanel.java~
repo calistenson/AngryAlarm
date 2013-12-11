@@ -28,6 +28,7 @@ public class CodeCrackerGamePanel extends JPanel {
   // instance vars
   private JPanel leftPanel, rightPanel;
   private JLabel topLabel;
+  private JLabel womanImage;
   private JButton level1, level2a, level2b, level3a, level3b, level3c, level3d, level4;
   
   // preferred sizes
@@ -69,14 +70,11 @@ public class CodeCrackerGamePanel extends JPanel {
     level3d = new JButton("Level 3 D");
     level4 = new JButton("Level 4");
     
-    BufferedImage womanPic = null;
-    try {
-      womanPic = ImageIO.read(new File("woman-final.gif"));
-      JLabel womanPicLabel = new JLabel(new ImageIcon(womanPic));
-      rightPanel.add(womanPicLabel);
-    } catch(IOException e) {
-      e.printStackTrace();
-    }
+    womanImage = new JLabel();
+    womanImage.setIcon(new ImageIcon ("images/woman-final.gif"));
+    womanImage.setLayout(new FlowLayout(FlowLayout.LEFT));
+    
+    //leftPanel.add(womanImage);
     
     
     CodeCrackerGamePanelListener listener = new CodeCrackerGamePanelListener();
@@ -104,6 +102,7 @@ public class CodeCrackerGamePanel extends JPanel {
     this.add(topLabel, BorderLayout.PAGE_START);
     this.add(leftPanel, BorderLayout.LINE_START);
     this.add(rightPanel, BorderLayout.CENTER);
+    this.add(womanImage, BorderLayout.LINE_END);
     
   }
   
