@@ -19,7 +19,8 @@ public class Level {
    */ 
   private Cipher cipherType;
   private String message;
-  private File storyLine;
+  private FileReader storyLine;
+  private String name; 
   
   /**
    * Default Constructor
@@ -31,10 +32,15 @@ public class Level {
    * @param c Cipher
    * @param s File
    */ 
-  public Level(Cipher c, File s, String mess) { 
+  public Level(Cipher c, String storyFile, String name, String mess) { 
     cipherType = c;
-    storyLine = s;  
+    this.name = name;
     message = mess;
+    try{    
+      storyLine = new FileReader(storyFile);  
+    }catch(Exception e){
+      System.out.println(e);
+    }
   }
   
   
@@ -70,20 +76,41 @@ public class Level {
     message = mess;
   }
   
+    
+  /**
+   * Getter method 
+   * @return String
+   */ 
+  public String getName(){
+    return name;
+  }
+  
+  /**
+   * Setter method
+   * @param nam String
+   */ 
+  public void setName(String nam){
+    name = nam;
+  }
+  
   /**
    * Getter Method
    * @return File
    */ 
-  public File getStoryLine(){
+  public FileReader getStoryLine(){
     return storyLine;
   }
- 
+  
   /**
    * Setter method
    * @param c Cipher
    */ 
-  public void setStoryLine(File s){
-    storyLine = s;
+  public void setStoryLine(String storyFile){
+    try{
+      storyLine = new FileReader(storyFile);
+    }catch(Exception e){
+      System.out.println(e);
+    }
   }
   
   /**
