@@ -43,15 +43,25 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     
     caesarButton = new JButton("Caesar Cipher");
     caesarButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
+    caesarButton.setPreferredSize(new Dimension(200, 100));
     
     vigButton = new JButton("Vigenere Cipher");
     vigButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
+    vigButton.setPreferredSize(new Dimension(200, 100));
     
     affineButton = new JButton("Affine Cipher");
     affineButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
+    affineButton.setPreferredSize(new Dimension(200, 100));
     
     hillButton = new JButton("Hill Cipher");
     hillButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
+    hillButton.setPreferredSize(new Dimension(200, 100));
+    
+    CodeCrackerInstructionsPanelListener listener = new CodeCrackerInstructionsPanelListener();
+    caesarButton.addActionListener(listener);
+    vigButton.addActionListener(listener);
+    affineButton.addActionListener(listener);
+    hillButton.addActionListener(listener);
 
     // add everything to frame
     this.add(instructionsText);
