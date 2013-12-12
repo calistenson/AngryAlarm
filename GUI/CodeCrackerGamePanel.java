@@ -25,12 +25,19 @@ import javax.imageio.ImageIO;
 
 public class CodeCrackerGamePanel extends JPanel {
   
-  // instance vars
-  private JPanel leftPanel, rightPanel, bottom;
-  private JLabel topLabel;
-  private JLabel womanImage;
-  private JButton level1, level2a, level2b, level3a, level3b, level3c, level3d, level4;
-  
+  // instance vars 
+  // for top
+  private JLabel headerLabel;
+  // for left panel
+  private JPanel leftPanel;
+  private JLabel levelsLabel;
+  private JButton romeButton, tuscanyButton, veniceButton, quadButton, tupeloButton, hoopButton, tunnelsButton, clappButton;
+  // for right panel
+  private JPanel rightPanel;
+  private JLabel instructLabel, imageLabel, submitLabel;
+  private JTextField submitText;
+  private JTextArea storyText;
+  private JButton submitButton; 
   // preferred sizes
   private final int WIDTH = 850, HEIGHT = 750;
   
@@ -43,123 +50,120 @@ public class CodeCrackerGamePanel extends JPanel {
     this.setBackground(new Color(76, 168, 194)); // sets background color
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
     
-    topLabel = new JLabel("<html><center>Welcome to Wendy Wellesley: Code Cracker!</center></html>");
-    topLabel.setFont(new Font("Sans Serif", Font.PLAIN, 24));
-    topLabel.setPreferredSize(new Dimension(850, 50));
+    // starts with the top panel
+    headerLabel = new JLabel("<html><center>Welcome to Wendy Wellesley: Code Cracker!</center></html>");
+    headerLabel.setFont(new Font("Sans Serif", Font.PLAIN, 24));
+    headerLabel.setPreferredSize(new Dimension(850, 50));
     
+    // creates left panel
     // nests Box Layout within panes of Flow Layout
     leftPanel = new JPanel();
     leftPanel.setPreferredSize(new Dimension(423, 700));
     leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
     leftPanel.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 4));
     leftPanel.setBackground(new Color(76, 168, 194));
+    // creates componenets for left panel
+    levelsLabel = new JLabel("Levels");
+    romeButton = new JButton("Ancient Rome");
+    tuscanyButton = new JButton("Tuscany");
+    veniceButton = new JButton("Venice");
+    quadButton = new JButton("Academic Quad");
+    tupeloButton = new JButton("Tupelo Lane");
+    hoopButton = new JButton("Cafe Hoop");
+    tunnelsButton = new JButton("Wellesley Tunnels");
+    clappButton = new JButton("Clapp Library");
+    // creates and adds listener to buttons
+    CodeCrackerGamePanelListener listener = new CodeCrackerGamePanelListener();
+    romeButton.addActionListener(listener);
+    tuscanyButton.addActionListener(listener);
+    veniceButton.addActionListener(listener);
+    quadButton.addActionListener(listener);
+    tupeloButton.addActionListener(listener);
+    hoopButton.addActionListener(listener);
+    tunnelsButton.addActionListener(listener);
+    clappButton.addActionListener(listener);
+    // adds components to panel
+    leftPanel.add(levelsLabel);
+    leftPanel.add(romeButton);
+    leftPanel.add(tuscanyButton);
+    leftPanel.add(veniceButton);
+    leftPanel.add(quadButton);
+    leftPanel.add(tupeloButton);
+    leftPanel.add(hoopButton);
+    leftPanel.add(tunnelsButton);
+    leftPanel.add(clappButton);
     
+    // creates right panel
+    // nests Box Layout within panes of Flow Layout    
     rightPanel = new JPanel();
     rightPanel.setPreferredSize(new Dimension(423, 700));
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
     rightPanel.setBorder(BorderFactory.createLineBorder(new Color(186, 186, 186), 4));
     rightPanel.setBackground(new Color(76, 168, 194));
+    // creates componenets for right panel
+    instructLabel = new JLabel("Instructions here");
+    storyText = new JTextArea("story here");
+    imageLabel = new JLabel("image here");
+    submitLabel = new JLabel("Submit the decoded message here when you are done.");
+    submitText = new JTextField();
+    submitButton = new JButton("Submit");
+    // adds listener to button
+    submitButton.addActionListener(listener);
+    // adds components to panel
+    rightPanel.add(instructLabel);
+    rightPanel.add(storyText);
+    rightPanel.add(imageLabel);
+    rightPanel.add(submitLabel);
+    rightPanel.add(submitText);
+    rightPanel.add(submitButton);
     
-    bottom = new JPanel();
-    bottom.setLayout(new BoxLayout(bottom, BoxLayout.Y_AXIS));
-    bottom.setBorder(BorderFactory.createLineBorder(new Color(186, 186, 186), 4));
-    
-    // creates buttons for left pane
-    level1 = new JButton("Level 1");
-    level2a = new JButton("Level 2 A");
-    level2b = new JButton("Level 2 B");
-    level3a = new JButton("Level 3 A");
-    level3b = new JButton("Level 3 B");
-    level3c = new JButton("Level 3 C");
-    level3d = new JButton("Level 3 D");
-    level4 = new JButton("Level 4");
-    
-    womanImage = new JLabel();
-    womanImage.setIcon(new ImageIcon ("woman-final.png"));
-    woman.setPreferredSize();
-    //womanImage.setLayout(new FlowLayout(FlowLayout.LEFT));
-    
-    //bottom = new JPanel();
-    //bottom.add(topLabel, BorderLayout.PAGE_END);
-    //bottom.add(womanImage, BorderLayout.PAGE_END);
-    
-    
-    CodeCrackerGamePanelListener listener = new CodeCrackerGamePanelListener();
-    level1.addActionListener(listener);
-    level2a.addActionListener(listener);
-    level2b.addActionListener(listener);
-    level3a.addActionListener(listener);
-    level3b.addActionListener(listener);
-    level3c.addActionListener(listener);
-    level3d.addActionListener(listener);
-    level4.addActionListener(listener);
-    
-    
-    // add components to pane
-    leftPanel.add(level1);
-    leftPanel.add(level2a, BorderLayout.LINE_START);
-    leftPanel.add(level2b, BorderLayout.LINE_START);
-    leftPanel.add(level3a, BorderLayout.LINE_START);
-    leftPanel.add(level3b, BorderLayout.LINE_START);
-    leftPanel.add(level3c, BorderLayout.LINE_START);
-    leftPanel.add(level3d, BorderLayout.LINE_START);
-    leftPanel.add(level4, BorderLayout.LINE_START);
-    
-    this.add(topLabel, BorderLayout.PAGE_START);
+    // adds everything to GUI
+    this.add(headerLabel, BorderLayout.PAGE_START);
     this.add(leftPanel, BorderLayout.LINE_START);
-    // this.add(rightPanel, BorderLayout.CENTER);
-    this.add(bottom, BorderLayout.CENTER);
-    //this.add(womanImage, BorderLayout.LINE_END);
+    this.add(rightPanel, BorderLayout.CENTER);
+    
     
   }
   
   private class CodeCrackerGamePanelListener implements ActionListener {
     
     public void actionPerformed(ActionEvent event) {
-      if (event.getSource() == level1) {
+      if (event.getSource() == romeButton) {
         System.out.println("Okay, begin level 1!");
         //set center panel to level1 info
-      } //else if (event.getSource() == ) {
-      //whatever
-      // } else if (event.getSource() == ) {
-      //whatever
-      // } else if (event.getSource() == ) {
-      //whatever
-      //  }
+      } else if (event.getSource() == ) {
+        
+      } else if (event.getSource() == ) {
+        
+      } else if (event.getSource() == ) {
+        
+      }
       
-      
-      //checks message to make sure it's correct
-      //returns true if so, false if not
-      /*
-       public boolean checkMessage(String message) {
-       return (message == whatever the correct message is);
-       }
-       */
-      
-      
-      //takes in boolean "correct"
-      //if !correct, then pop up box saying "please try again"
-      //if correct, then changes all things in right panel to
-      //the next level
-      /*
-       public void nextLevel(boolean correct) {
-       if (!correct) {
-       JOptionPane.showMessageDialog(null, "Your password was incorrect. Please try again.");
-       }
-       else {
-       }
-       }
-       */ 
-      
-      
+ 
+
     }
     
-    
-    
-    
+      // checks message to make sure it's correct
+      // returns true if so, false if not
+      public boolean checkMessage(String message) {
+        return (message == c.);
+      }
+      
+      
+      
+      // takes in boolean "correct"
+      // if !correct, then pop up box saying "please try again"
+      // if correct, then changes all things in right panel to
+      // the next level
+      
+      public void nextLevel(Level l) {
+        if (!correct) {
+          JOptionPane.showMessageDialog(null, "Your password was incorrect. Please try again.");
+        }
+        else {
+        }
+      }
+
   }
-  
-  
-  
   
 }
