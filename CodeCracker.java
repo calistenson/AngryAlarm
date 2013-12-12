@@ -70,6 +70,10 @@ public class CodeCracker {
     return coded;
   }  
   
+  public Level getCurrentLevel() {
+    return current;
+  }
+  
   
   
   public static void main(String[] args) { 
