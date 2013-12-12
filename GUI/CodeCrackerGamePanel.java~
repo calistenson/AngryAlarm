@@ -26,7 +26,7 @@ import javax.imageio.ImageIO;
 public class CodeCrackerGamePanel extends JPanel {
   
   // instance vars
-  private JPanel leftPanel, rightPanel;
+  private JPanel leftPanel, rightPanel, bottom;
   private JLabel topLabel;
   private JLabel womanImage;
   private JButton level1, level2a, level2b, level3a, level3b, level3c, level3d, level4;
@@ -60,6 +60,10 @@ public class CodeCrackerGamePanel extends JPanel {
     rightPanel.setBorder(BorderFactory.createLineBorder(new Color(186, 186, 186), 4));
     rightPanel.setBackground(new Color(76, 168, 194));
     
+    bottom = new JPanel();
+    bottom.setLayout(new BoxLayout(bottom, BoxLayout.Y_AXIS));
+    bottom.setBorder(BorderFactory.createLineBorder(new Color(186, 186, 186), 4));
+    
     // creates buttons for left pane
     level1 = new JButton("Level 1");
     level2a = new JButton("Level 2 A");
@@ -71,10 +75,13 @@ public class CodeCrackerGamePanel extends JPanel {
     level4 = new JButton("Level 4");
     
     womanImage = new JLabel();
-    womanImage.setIcon(new ImageIcon ("images/woman-final.gif"));
-    womanImage.setLayout(new FlowLayout(FlowLayout.LEFT));
+    womanImage.setIcon(new ImageIcon ("woman-final.png"));
+    woman.setPreferredSize();
+    //womanImage.setLayout(new FlowLayout(FlowLayout.LEFT));
     
-    //leftPanel.add(womanImage);
+    //bottom = new JPanel();
+    //bottom.add(topLabel, BorderLayout.PAGE_END);
+    //bottom.add(womanImage, BorderLayout.PAGE_END);
     
     
     CodeCrackerGamePanelListener listener = new CodeCrackerGamePanelListener();
@@ -86,11 +93,10 @@ public class CodeCrackerGamePanel extends JPanel {
     level3c.addActionListener(listener);
     level3d.addActionListener(listener);
     level4.addActionListener(listener);
-    
-    
+
     
     // add components to pane
-    leftPanel.add(level1, BorderLayout.LINE_START);
+    leftPanel.add(level1);
     leftPanel.add(level2a, BorderLayout.LINE_START);
     leftPanel.add(level2b, BorderLayout.LINE_START);
     leftPanel.add(level3a, BorderLayout.LINE_START);
@@ -101,8 +107,9 @@ public class CodeCrackerGamePanel extends JPanel {
     
     this.add(topLabel, BorderLayout.PAGE_START);
     this.add(leftPanel, BorderLayout.LINE_START);
-    this.add(rightPanel, BorderLayout.CENTER);
-    this.add(womanImage, BorderLayout.LINE_END);
+   // this.add(rightPanel, BorderLayout.CENTER);
+    this.add(bottom, BorderLayout.CENTER);
+    //this.add(womanImage, BorderLayout.LINE_END);
     
   }
   

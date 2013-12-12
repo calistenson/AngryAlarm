@@ -69,8 +69,8 @@ public class CodeCracker {
     String coded = codes.get(message);
     return coded;
   }  
-    
-    
+  
+  
   
   public static void main(String[] args) { 
     //(Cipher c, String storyFile, String name, String mess)
@@ -132,7 +132,7 @@ public class CodeCracker {
     game.playLevel("Storm the tower! First person to the top gets ice cream!");
     game.playLevel("ladsfjsaldfjsdjf");
     
-                             
+    
     
     
   }

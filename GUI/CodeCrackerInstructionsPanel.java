@@ -34,9 +34,9 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     
     // create and stylize new componenets
     instructionsText = new JTextArea("This is where the instructions will be." +
-                                               "\nHere, we will place lots of text with instructions." +
-                                               "\nMaybe we could make buttons that make pop-up message boxes " +
-                                               "appear with instructions if it's too much to all fit here?");
+                                     "\nHere, we will place lots of text with instructions." +
+                                     "\nMaybe we could make buttons that make pop-up message boxes " +
+                                     "appear with instructions if it's too much to all fit here?");
     instructionsText.setFont(new Font("Sans Serif", Font.PLAIN, 18)); // sets the font
     instructionsText.setLineWrap(true);
     instructionsText.setWrapStyleWord(true);
@@ -62,14 +62,14 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     vigButton.addActionListener(listener);
     affineButton.addActionListener(listener);
     hillButton.addActionListener(listener);
-
+    
     // add everything to frame
     this.add(instructionsText);
     this.add(caesarButton);
     this.add(vigButton);
     this.add(affineButton);
     this.add(hillButton);
-              
+    
   }
   
   private class CodeCrackerInstructionsPanelListener implements ActionListener {

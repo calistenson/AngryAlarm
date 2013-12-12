@@ -11,7 +11,7 @@
 package ciphers;
 
 public class AffineCipher extends Cipher {
-    
+  
   /**
    * Instance variables
    * keyVal, shiftVal, keyInverse int
@@ -38,7 +38,7 @@ public class AffineCipher extends Cipher {
     shiftVal = s;
   }
   
-    
+  
   /**
    * getter method
    * @return int
@@ -110,12 +110,12 @@ public class AffineCipher extends Cipher {
   }
   
   /**
-    * decrypt()
-    * @param message String
-    * @return String
-    * Defined abstract method inherited from Cipher.java
-    * Decodes messages for Affine Ciphers.
-    */
+   * decrypt()
+   * @param message String
+   * @return String
+   * Defined abstract method inherited from Cipher.java
+   * Decodes messages for Affine Ciphers.
+   */
   public String decrypt(String message){
     int newIndex;
     String decrypted = "";
@@ -140,9 +140,9 @@ public class AffineCipher extends Cipher {
     System.out.println(c.decrypt(c.encrypt("CALI"))); 
     System.out.println(c.decrypt(c.encrypt("SUPERCALIFRAGILISTICEXPIALADOCIOUS")));
     
-  //needs more testing
+    //needs more testing
   }//end main
   
-
+  
   
 }

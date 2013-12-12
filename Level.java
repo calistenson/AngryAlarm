@@ -76,7 +76,7 @@ public class Level {
     message = mess;
   }
   
-    
+  
   /**
    * Getter method 
    * @return String

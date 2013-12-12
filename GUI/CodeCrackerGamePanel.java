@@ -93,7 +93,7 @@ public class CodeCrackerGamePanel extends JPanel {
     level3c.addActionListener(listener);
     level3d.addActionListener(listener);
     level4.addActionListener(listener);
-
+    
     
     // add components to pane
     leftPanel.add(level1);
@@ -107,7 +107,7 @@ public class CodeCrackerGamePanel extends JPanel {
     
     this.add(topLabel, BorderLayout.PAGE_START);
     this.add(leftPanel, BorderLayout.LINE_START);
-   // this.add(rightPanel, BorderLayout.CENTER);
+    // this.add(rightPanel, BorderLayout.CENTER);
     this.add(bottom, BorderLayout.CENTER);
     //this.add(womanImage, BorderLayout.LINE_END);
     
@@ -131,25 +131,25 @@ public class CodeCrackerGamePanel extends JPanel {
       //checks message to make sure it's correct
       //returns true if so, false if not
       /*
-      public boolean checkMessage(String message) {
-        return (message == whatever the correct message is);
-      }
-      */
+       public boolean checkMessage(String message) {
+       return (message == whatever the correct message is);
+       }
+       */
       
-        
+      
       //takes in boolean "correct"
       //if !correct, then pop up box saying "please try again"
       //if correct, then changes all things in right panel to
       //the next level
       /*
-      public void nextLevel(boolean correct) {
-        if (!correct) {
-          JOptionPane.showMessageDialog(null, "Your password was incorrect. Please try again.");
-        }
-        else {
-        }
-      }
-      */ 
+       public void nextLevel(boolean correct) {
+       if (!correct) {
+       JOptionPane.showMessageDialog(null, "Your password was incorrect. Please try again.");
+       }
+       else {
+       }
+       }
+       */ 
       
       
     }

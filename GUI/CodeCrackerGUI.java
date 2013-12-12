@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CodeCrackerGUI {
-
+  
   
   public static void main (String[] args) {
     

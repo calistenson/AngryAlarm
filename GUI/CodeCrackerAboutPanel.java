@@ -37,9 +37,9 @@ public class CodeCrackerAboutPanel extends JPanel {
     womanImage.setLayout(new FlowLayout(FlowLayout.LEFT));
     
     this.add(womanImage);
-              
+    
   }
   
-
+  
   
 }
