@@ -128,42 +128,52 @@ public class CodeCrackerGamePanel extends JPanel {
   private class CodeCrackerGamePanelListener implements ActionListener {
     
     public void actionPerformed(ActionEvent event) {
-      if (event.getSource() == romeButton) {
-        System.out.println("Okay, begin level 1!");
-        //set center panel to level1 info
-      } else if (event.getSource() == ) {
-        
-      } else if (event.getSource() == ) {
-        
-      } else if (event.getSource() == ) {
-        
+      JButton b = new JButton();
+      b = (JButton)event.getSource();
+      if (b == submitButton) {
+        System.out.println("Wooh! You submitted!");
+      } else if (b == romeButton) {
+        System.out.println("Okay, you may now begin! You are now in ancient Rome");
+        //nextLevel(
+      } else {
+        String message = (String)JOptionPane.showInputDialog("Please input the decrypted message from the previous level");
+        if (b == veniceButton) {
+          if (checkMessage
+        } else if (b == tuscanyButton) {
+          
+        } else if (b == veniceButton) {
+          
+        } else if (b == quadButton) {
+          
+        } else if (b == tupeloButton) {
+          
+        } else if (b == hoopButton) {
+          
+        } else if (b == tunnelsButton) {
+          
+        } else if (b == clappButton) {
+          String message;
+          JOptionPane.showMessageDialog(null, "Here is where instructions for the Caesar Cipher could be placed.");
+          System.out.println("okay awesome!");
+        }
       }
       
- 
-
     }
     
-      // checks message to make sure it's correct
-      // returns true if so, false if not
-      public boolean checkMessage(String message) {
-        return (message == c.);
-      }
-      
-      
-      
-      // takes in boolean "correct"
-      // if !correct, then pop up box saying "please try again"
-      // if correct, then changes all things in right panel to
-      // the next level
-      
-      public void nextLevel(Level l) {
-        if (!correct) {
-          JOptionPane.showMessageDialog(null, "Your password was incorrect. Please try again.");
-        }
-        else {
-        }
-      }
-
+    /*  // checks message to make sure it's correct
+     // returns true if so, false if not
+     public boolean checkMessage(String message) {
+     return (message == c.getCurrentLevel().getMessage());
+     }
+     
+     public boolean checkMessage(String message, 
+     
+     // sets center panel to next level's info
+     public void nextLevel(Level l) {
+     
+     }
+     */
+    
   }
   
 }
