@@ -25,7 +25,9 @@ import javax.imageio.ImageIO;
 
 public class CodeCrackerGamePanel extends JPanel {
   
-  // instance vars 
+  // instance vars
+  private CodeCracker game;
+  private Levels graph;
   // for top
   private JLabel headerLabel;
   // for left panel
@@ -42,7 +44,10 @@ public class CodeCrackerGamePanel extends JPanel {
   private final int WIDTH = 850, HEIGHT = 750;
   
   // constructor
-  public CodeCrackerGamePanel () { //(CodeCracker c) {
+  public CodeCrackerGamePanel (CodeCracker c, Levels l) {
+    
+    game = c;
+    graph = l;
     
     // sets up visuals
     setLayout(new BorderLayout()); // sets layout to Border Layout
@@ -105,7 +110,7 @@ public class CodeCrackerGamePanel extends JPanel {
     storyText = new JTextArea("story here");
     imageLabel = new JLabel("image here");
     submitLabel = new JLabel("Submit the decoded message here when you are done.");
-    submitText = new JTextField();
+    submitText = new JTextField(40);
     submitButton = new JButton("Submit");
     // adds listener to button
     submitButton.addActionListener(listener);
@@ -132,47 +137,107 @@ public class CodeCrackerGamePanel extends JPanel {
       b = (JButton)event.getSource();
       if (b == submitButton) {
         System.out.println("Wooh! You submitted!");
+        if (game.playLevel(submitText.getText())) {
+          nextLevel(game.current);
+          JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+        }
+        else JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
       } else if (b == romeButton) {
         System.out.println("Okay, you may now begin! You are now in ancient Rome");
-        //nextLevel(
       } else {
         String message = (String)JOptionPane.showInputDialog("Please input the decrypted message from the previous level");
-        if (b == veniceButton) {
-          if (checkMessage
-        } else if (b == tuscanyButton) {
-          
+        if (b == tuscanyButton) {
+          if (checkMessage(message, graph.getRome())) {
+            if (game.chooseLevelFromPause(graph.getRome(), graph.getTuscany(), message)) {
+              nextLevel(graph.getTuscany());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+            }
+          } else {
+            JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+          }
         } else if (b == veniceButton) {
-          
+          if (checkMessage(message, graph.getTuscany())) {
+            if (game.chooseLevelFromPause(graph.getTuscany(), graph.getVenice(), message)) {
+              nextLevel(graph.getVenice());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+            }
+          } else {
+            JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+          }
         } else if (b == quadButton) {
-          
+          if (checkMessage(message, graph.getVenice())) {
+            if (game.chooseLevelFromPause(graph.getVenice(), graph.getQuad(), message)) {
+              nextLevel(graph.getQuad());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+            }
+          } else {
+            JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+          } 
         } else if (b == tupeloButton) {
-          
+          if (checkMessage(message, graph.getQuad())) {
+            if (game.chooseLevelFromPause(graph.getQuad(), graph.getTupelo(), message)) {
+              nextLevel(graph.getTupelo());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+            }
+          } else {
+            JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+          } 
         } else if (b == hoopButton) {
-          
+          if (checkMessage(message, graph.getTupelo())) {
+            if (game.chooseLevelFromPause(graph.getTupelo(), graph.getHoop(), message)) {
+              nextLevel(graph.getHoop());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+            }
+          } else {
+            JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+          } 
         } else if (b == tunnelsButton) {
-          
+          if (checkMessage(message, graph.getHoop())) {
+            if (game.chooseLevelFromPause(graph.getHoop(), graph.getTunnels(), message)) {
+              nextLevel(graph.getTunnels());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+            }
+          } else {
+            JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+          }  
         } else if (b == clappButton) {
-          String message;
-          JOptionPane.showMessageDialog(null, "Here is where instructions for the Caesar Cipher could be placed.");
-          System.out.println("okay awesome!");
-        }
+          if (checkMessage(message, graph.getTunnels())) {
+            if (game.chooseLevelFromPause(graph.getTunnels(), graph.getClapp(), message)) {
+              nextLevel(graph.getClapp());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
+                                            game.current.getName());
+            }
+          } else {
+            JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+          } 
+        } 
       }
       
     }
     
-    /*  // checks message to make sure it's correct
+     // checks message to make sure it's correct
      // returns true if so, false if not
      public boolean checkMessage(String message) {
-     return (message == c.getCurrentLevel().getMessage());
+       return (message.equals(game.getCurrentLevel().getMessage()));
      }
      
-     public boolean checkMessage(String message, 
-     
+     public boolean checkMessage(String message, Level l) {
+       return (message.equals(l.getMessage()));
+     }
+    
+ 
      // sets center panel to next level's info
      public void nextLevel(Level l) {
-     
+       System.out.println("Setting center (viewed as right) panel to next level's info.");
      }
-     */
+     
     
   }
   

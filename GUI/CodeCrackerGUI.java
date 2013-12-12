@@ -29,7 +29,9 @@ public class CodeCrackerGUI {
     // creates panels
     CodeCrackerAboutPanel aboutPanel = new CodeCrackerAboutPanel();
     CodeCrackerInstructionsPanel instructionsPanel = new CodeCrackerInstructionsPanel();
-    CodeCrackerGamePanel gamePanel = new CodeCrackerGamePanel(); //(game);
+    Levels graph = new Levels();
+    CodeCracker game = new CodeCracker(graph.getGameGraph());
+    CodeCrackerGamePanel gamePanel = new CodeCrackerGamePanel(game, graph);
     
     // creates tabbed pane and
     // adds tabbed panels to frame
