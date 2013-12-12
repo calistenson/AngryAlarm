@@ -57,6 +57,7 @@ public class CodeCracker {
   public void chooseNewLevel(Level l){
     if(levels.isArc(current, l) && levelAccomplished){
       current = l;
+      levelAccomplished = false;
     }else if(!levelAccomplished){
       System.out.println("Please complete current level");
     }else{
@@ -67,6 +68,7 @@ public class CodeCracker {
   public boolean chooseLevelFromPause(Level last, Level next, String s){
     if (last.getMessage().equals(s)) {
       current = next;
+      levelAccomplished = false;
       return true;
     }
     return false;
@@ -113,7 +115,7 @@ public class CodeCracker {
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
     HillCipher hc = new HillCipher(key, shiftVal, keyInv);
-    Level clapp = new Level(hc, "New Jersey Princeton University.txt", "Clapp Library", "HI");
+    Level clapp = new Level(hc, "Clapp_Library.txt", "Clapp Library", "HI");
     
     AdjMatGraphPlus<Level> gameGraph = new AdjMatGraphPlus<Level>();
     gameGraph.addVertex(rome);
