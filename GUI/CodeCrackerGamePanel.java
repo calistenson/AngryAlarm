@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.image.BufferedImage; 
 import java.io.*;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.filechooser.FileFilter;
 import javax.imageio.ImageIO;
@@ -111,6 +112,8 @@ public class CodeCrackerGamePanel extends JPanel {
     imageLabel = new JLabel("image here");
     submitLabel = new JLabel("Submit the decoded message here when you are done.");
     submitText = new JTextField(40);
+    //System.out.println("Rows: " + submitText.getRows() + " // Columns: " + submitText.getColumns());
+    System.out.println("Rows: " + storyText.getRows() + " // Columns: " + storyText.getColumns());
     submitButton = new JButton("Submit");
     // adds listener to button
     submitButton.addActionListener(listener);
@@ -140,7 +143,7 @@ public class CodeCrackerGamePanel extends JPanel {
         if (game.playLevel(submitText.getText())) {
           nextLevel(game.current);
           JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+                                        game.current.getName());
         }
         else JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
       } else if (b == romeButton) {
@@ -222,22 +225,28 @@ public class CodeCrackerGamePanel extends JPanel {
       
     }
     
-     // checks message to make sure it's correct
-     // returns true if so, false if not
-     public boolean checkMessage(String message) {
-       return (message.equals(game.getCurrentLevel().getMessage()));
-     }
-     
-     public boolean checkMessage(String message, Level l) {
-       return (message.equals(l.getMessage()));
-     }
+    // checks message to make sure it's correct
+    // returns true if so, false if not
+    public boolean checkMessage(String message) {
+      return (message.equals(game.getCurrentLevel().getMessage()));
+    }
     
- 
-     // sets center panel to next level's info
-     public void nextLevel(Level l) {
-       System.out.println("Setting center (viewed as right) panel to next level's info.");
-     }
-     
+    public boolean checkMessage(String message, Level l) {
+      return (message.equals(l.getMessage()));
+    }
+    
+    
+    // sets center panel to next level's info
+    public void nextLevel(Level l) {
+      System.out.println("Setting center (viewed as right) panel to next level's info.");
+      try {
+        storyText.read(l.getStoryLine(), null);
+      } catch (IOException e) {
+        System.out.print("***ATTENTION***: COULD NOT READ NEXT LEVEL'S STORY LINE FROM FILE. \n ERROR: " + e);
+      }
+      submitText.setText("");
+    }
+    
     
   }
   
