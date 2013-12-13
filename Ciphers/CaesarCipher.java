@@ -89,6 +89,10 @@ public class CaesarCipher extends Cipher{
     return decrypted;
   }
   
+  public String getType() {
+    return "Caesar Cipher";
+  }
+  
   /**
    * main()
    * for testing

@@ -103,6 +103,10 @@ public class VigenereCipher extends Cipher{
     return decrypted;
   }
   
+  public String getType() {
+    return "Caesar Cipher";
+  }
+  
   /**
    * main()
    * tests the class methods.

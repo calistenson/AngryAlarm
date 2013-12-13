@@ -21,4 +21,6 @@ public abstract class Cipher{
   
   public abstract String decrypt(String message);
   
+  public abstract String getType();
+  
 }

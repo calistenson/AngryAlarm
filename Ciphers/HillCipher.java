@@ -188,6 +188,10 @@ public class HillCipher extends Cipher{
     
   }
   
+  public String getType() {
+    return "Caesar Cipher";
+  }
+  
   /**
    * main()
    * for testing

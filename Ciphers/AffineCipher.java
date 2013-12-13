@@ -129,6 +129,10 @@ public class AffineCipher extends Cipher {
     return decrypted;
   }
   
+  public String getType() {
+    return "Caesar Cipher";
+  }
+  
   /**
    * main()
    * for testing
