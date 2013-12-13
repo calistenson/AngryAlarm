@@ -40,7 +40,8 @@ public class CodeCrackerGamePanel extends JPanel {
   private JLabel instructLabel, imageLabel, submitLabel;
   private JTextField submitText, storyText;
   private JButton submitButton;
-  private ImageIcon detectiveIcon;
+  private BufferedImage detectiveImage;
+  private JLabel detectiveLabel;
   // preferred sizes
   private final int WIDTH = 850, HEIGHT = 750;
   
@@ -109,13 +110,12 @@ public class CodeCrackerGamePanel extends JPanel {
     // creates componenets for right panel
     instructLabel = new JLabel("Current level: " + game.getCurrentLevel().getName() + ". Read the storyline and click on the " 
                                  + game.getCurrentLevel().getCipher().getType() + " button in the instructions pane " 
-                              + "for more info on how to decrypt the cipher.");
+                                 + "for more info on how to decrypt the cipher.");
     storyText = new JTextField("story here", 40);
     imageLabel = new JLabel("image here");
     submitLabel = new JLabel("Submit the decoded message here when you are done.");
     submitText = new JTextField(40);
     submitButton = new JButton("Submit");
-    detectiveIcon = new ImageIcon("Images/woman-final.gif");
     // adds listener to button
     submitButton.addActionListener(listener);
     // adds components to panel
@@ -126,21 +126,31 @@ public class CodeCrackerGamePanel extends JPanel {
     rightPanel.add(submitText);
     rightPanel.add(submitButton);
     
+    try {
+      detectiveImage = ImageIO.read(new File("Images/woman.png"));
+      detectiveLabel = new JLabel(new ImageIcon(detectiveImage));
+      rightPanel.add(detectiveLabel);
+    } catch (IOException e) {
+      System.out.println("***ALERT***  Could not read or display image! Error: " + e);
+    }
+    
+    
     // adds everything to GUI
     this.add(headerLabel, BorderLayout.PAGE_START);
     this.add(leftPanel, BorderLayout.LINE_START);
     this.add(rightPanel, BorderLayout.CENTER);
     
   }
-  
-  public void paintComponent (Graphics page) {
-    super.paintComponent(page);
-    detectiveIcon.paintIcon(this, page, 0, 0);
-  }
+  /*
+   public void paintComponent (Graphics page) {
+   super.paintComponent(page);
+   detectiveIcon.paintIcon(this, page, 0, 418);
+   } */
   
   private class CodeCrackerGamePanelListener implements ActionListener {
     
     public void actionPerformed(ActionEvent event) {
+      //leftPanel.repaint();
       JButton b = new JButton();
       b = (JButton)event.getSource();
       if (b == submitButton) {

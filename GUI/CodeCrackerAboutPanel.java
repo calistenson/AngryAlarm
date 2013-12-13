@@ -31,17 +31,15 @@ public class CodeCrackerAboutPanel extends JPanel {
     // whateverlabel.setFont(new Font("Serif", Font.PLAIN, 18)); // sets the font
     this.setBackground(new Color(76, 168, 194)); // sets background color
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
-    
-    //detectiveIcon = new ImageIcon("Images/woman-final.gif");
-    //detectiveIcon = new ImageIcon("Images/happyFace.gif");
-    detectiveIcon = new ImageIcon("Images/womanplz.png");
+
+    detectiveIcon = new ImageIcon("Images/woman.png");
 
     
   }
   
   public void paintComponent (Graphics page) {
     super.paintComponent(page);
-    detectiveIcon.paintIcon(this, page, 0, 0);
+    detectiveIcon.paintIcon(this, page, 0, 418);
   }
   
   
