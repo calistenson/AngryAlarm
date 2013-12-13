@@ -38,8 +38,7 @@ public class CodeCrackerGamePanel extends JPanel {
   // for right panel
   private JPanel rightPanel;
   private JLabel instructLabel, imageLabel, submitLabel;
-  private JTextField submitText;
-  private JTextArea storyText;
+  private JTextField submitText, storyText;
   private JButton submitButton; 
   // preferred sizes
   private final int WIDTH = 850, HEIGHT = 750;
@@ -107,13 +106,13 @@ public class CodeCrackerGamePanel extends JPanel {
     rightPanel.setBorder(BorderFactory.createLineBorder(new Color(186, 186, 186), 4));
     rightPanel.setBackground(new Color(76, 168, 194));
     // creates componenets for right panel
-    instructLabel = new JLabel("Instructions here");
-    storyText = new JTextArea("story here");
+    instructLabel = new JLabel("Current level: " + game.getCurrentLevel().getName() + ". Read the storyline and click on the " 
+                                 + game.getCurrentLevel().getCipher().getType() + " button in the instructions pane " 
+                              + "for more info on how to decrypt the cipher.");
+    storyText = new JTextField("story here", 40);
     imageLabel = new JLabel("image here");
     submitLabel = new JLabel("Submit the decoded message here when you are done.");
     submitText = new JTextField(40);
-    //System.out.println("Rows: " + submitText.getRows() + " // Columns: " + submitText.getColumns());
-    System.out.println("Rows: " + storyText.getRows() + " // Columns: " + storyText.getColumns());
     submitButton = new JButton("Submit");
     // adds listener to button
     submitButton.addActionListener(listener);
