@@ -19,7 +19,7 @@ public class Level {
    */ 
   private Cipher cipherType;
   private String message;
-  private FileReader storyLine;
+  private File storyLine;
   private String name; 
   
   /**
@@ -37,7 +37,7 @@ public class Level {
     this.name = name;
     message = mess;
     try{    
-      storyLine = new FileReader(storyFile);
+      storyLine = new File(storyFile);
     }catch(Exception e){
       System.out.println(e);
     }
@@ -97,7 +97,7 @@ public class Level {
    * Getter Method
    * @return File
    */ 
-  public FileReader getStoryLine(){
+  public File getStoryLine(){
     return storyLine;
   }
   
@@ -107,7 +107,7 @@ public class Level {
    */ 
   public void setStoryLine(String storyFile){
     try{
-      storyLine = new FileReader(storyFile);
+      storyLine = new File(storyFile);
     }catch(Exception e){
       System.out.println(e);
     }
