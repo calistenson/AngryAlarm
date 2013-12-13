@@ -14,17 +14,17 @@ public class Levels {
   
   public Levels () {
     CaesarCipher cc = new CaesarCipher(3);
-    rome = new Level(cc, "Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
+    rome = new Level(cc, "Content/Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
     
     VigenereCipher vc = new VigenereCipher("Wendy");
-    tuscany = new Level(vc, "Tuscany.txt", "Tuscany", "The Medici family kills all who protest to their power.");
-    venice = new Level(vc, "Venice.txt", "Venice", "The pirates attacked our ship! We need reinforcements.");
+    tuscany = new Level(vc, "Content/Tuscany.txt", "Tuscany", "The Medici family kills all who protest to their power.");
+    venice = new Level(vc, "Content/Venice.txt", "Venice", "The pirates attacked our ship! We need reinforcements.");
     
     AffineCipher ac = new AffineCipher(9, 3, 3);
-    quad = new Level(ac, "Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower! First person to the top gets ice cream!");
-    tupelo = new Level(ac, "Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
-    hoop = new Level(ac, "Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos.");
-    tunnels = new Level(ac, "Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos!");
+    quad = new Level(ac, "Content/Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower! First person to the top gets ice cream!");
+    tupelo = new Level(ac, "Content/Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
+    hoop = new Level(ac, "Content/Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos.");
+    tunnels = new Level(ac, "Content/Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos!");
     
     double[][] k = new double[2][2];
     k[0][0] = 9;
@@ -41,7 +41,7 @@ public class Levels {
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
     HillCipher hc = new HillCipher(key, shiftVal, keyInv);
-    clapp = new Level(hc, "Clapp_Library.txt", "Clapp Library", "HI");
+    clapp = new Level(hc, "Content/Clapp_Library.txt", "Clapp Library", "HI");
     
     gameGraph = new AdjMatGraphPlus<Level>();
     gameGraph.addVertex(rome);
