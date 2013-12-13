@@ -1,0 +1,1 @@
+The year is 1001 and you are in Venice. The city is working hard to keep their trade away from the pirates. Messages are being passed using the Vigenere cipher from one Venetian boat to the next. The cipher below has the latest message for you to read from a ship that may have been attacked by pirates. 

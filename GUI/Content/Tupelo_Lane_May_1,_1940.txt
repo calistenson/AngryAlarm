@@ -1,0 +1,1 @@
+	In 1940 Wellesley continued its tradition of the annual hoop rolling race. You find a piece of paper on the ground with a message. It’s encrypted with the Affine Cipher. Decode it to see who won the race!

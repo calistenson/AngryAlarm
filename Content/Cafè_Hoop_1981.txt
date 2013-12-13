@@ -1,9 +1,0 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf400
-{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
-{\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\sl360
-
-\f0\b\fs32 \cf0 	
-\b0 The magic notebook has sent you back to 1981 to visit the first Caf\'e8 Hoop. The hoop is just starting out and they need people to suggest things for their menu. The suggestions go in a jar on the counter. While you\'92re there they begin going through the suggestions. They find one of them that looks like random letters and almost throw it out when you realize you can read it for them. Use the Affine Cipher to figure out what the suggestion for the Hoop is.}
