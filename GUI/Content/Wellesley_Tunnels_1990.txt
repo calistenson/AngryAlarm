@@ -1,1 +1,1 @@
-	The magic notebook has transported you to the tunnels under Wellesley College. A bunch of random letters are transcribed on walls. Try using the Affine Cipher to see what it says.
+The magic notebook has transported you to the tunnels under Wellesley College. A bunch of random letters are transcribed on walls. Try using the Affine Cipher to see what it says.
