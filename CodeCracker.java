@@ -88,17 +88,17 @@ public class CodeCracker {
   
   public static void main(String[] args) { 
     //(Cipher c, String storyFile, String name, String mess)
-    Level rome = new Level(new CaesarCipher(3), "Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
+    Level rome = new Level(new CaesarCipher(3), "Content/Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
     
     VigenereCipher vc = new VigenereCipher("Wendy");
-    Level tuscany = new Level(vc, "Tuscany.txt", "Tuscany", "The Medici family kills all who protest to their power.");
-    Level venice = new Level(vc, "Venice.txt", "Venice", "The pirates attacked our ship! We need reinforcements.");
+    Level tuscany = new Level(vc, "Content/Tuscany.txt", "Tuscany", "The Medici family kills all who protest to their power.");
+    Level venice = new Level(vc, "Content/Venice.txt", "Venice", "The pirates attacked our ship! We need reinforcements.");
     
     AffineCipher ac = new AffineCipher(9, 3, 3);
-    Level quad = new Level(ac, "Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower! First person to the top gets ice cream!");
-    Level tupelo = new Level(ac, "Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
-    Level hoop = new Level(ac, "Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos.");
-    Level tunnels = new Level(ac, "Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos!");
+    Level quad = new Level(ac, "Content/Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower! First person to the top gets ice cream!");
+    Level tupelo = new Level(ac, "Content/Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
+    Level hoop = new Level(ac, "Content/Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos.");
+    Level tunnels = new Level(ac, "Content/Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos!");
     
     double[][] k = new double[2][2];
     k[0][0] = 9;
@@ -115,7 +115,7 @@ public class CodeCracker {
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
     HillCipher hc = new HillCipher(key, shiftVal, keyInv);
-    Level clapp = new Level(hc, "Clapp_Library.txt", "Clapp Library", "HI");
+    Level clapp = new Level(hc, "Content/Clapp_Library.txt", "Clapp Library", "HI");
     
     AdjMatGraphPlus<Level> gameGraph = new AdjMatGraphPlus<Level>();
     gameGraph.addVertex(rome);
