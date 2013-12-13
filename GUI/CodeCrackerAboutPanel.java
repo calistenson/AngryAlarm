@@ -22,7 +22,7 @@ public class CodeCrackerAboutPanel extends JPanel {
   
   // preferred sizes
   private final int WIDTH = 850, HEIGHT = 750;
-  private JLabel womanImage;
+  private ImageIcon detectiveIcon;
   
   // constructor
   public CodeCrackerAboutPanel () {
@@ -32,12 +32,16 @@ public class CodeCrackerAboutPanel extends JPanel {
     this.setBackground(new Color(76, 168, 194)); // sets background color
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
     
-    womanImage = new JLabel();
-    womanImage.setIcon(new ImageIcon ("woman-final.gif"));
-    womanImage.setLayout(new FlowLayout(FlowLayout.LEFT));
+    //detectiveIcon = new ImageIcon("Images/woman-final.gif");
+    //detectiveIcon = new ImageIcon("Images/happyFace.gif");
+    detectiveIcon = new ImageIcon("Images/womanplz.png");
+
     
-    this.add(womanImage);
-    
+  }
+  
+  public void paintComponent (Graphics page) {
+    super.paintComponent(page);
+    detectiveIcon.paintIcon(this, page, 0, 0);
   }
   
   

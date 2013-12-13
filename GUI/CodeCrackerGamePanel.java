@@ -39,7 +39,8 @@ public class CodeCrackerGamePanel extends JPanel {
   private JPanel rightPanel;
   private JLabel instructLabel, imageLabel, submitLabel;
   private JTextField submitText, storyText;
-  private JButton submitButton; 
+  private JButton submitButton;
+  private ImageIcon detectiveIcon;
   // preferred sizes
   private final int WIDTH = 850, HEIGHT = 750;
   
@@ -114,6 +115,7 @@ public class CodeCrackerGamePanel extends JPanel {
     submitLabel = new JLabel("Submit the decoded message here when you are done.");
     submitText = new JTextField(40);
     submitButton = new JButton("Submit");
+    detectiveIcon = new ImageIcon("Images/woman-final.gif");
     // adds listener to button
     submitButton.addActionListener(listener);
     // adds components to panel
@@ -129,7 +131,11 @@ public class CodeCrackerGamePanel extends JPanel {
     this.add(leftPanel, BorderLayout.LINE_START);
     this.add(rightPanel, BorderLayout.CENTER);
     
-    
+  }
+  
+  public void paintComponent (Graphics page) {
+    super.paintComponent(page);
+    detectiveIcon.paintIcon(this, page, 0, 0);
   }
   
   private class CodeCrackerGamePanelListener implements ActionListener {
