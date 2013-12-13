@@ -215,7 +215,6 @@ public class HillCipher extends Cipher{
     
   }//end main
   
-  //more testing is necessary
   
   
 }
