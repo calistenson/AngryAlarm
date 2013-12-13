@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
 
+
+
 public class CodeCrackerGUI {
   
   
@@ -20,7 +22,7 @@ public class CodeCrackerGUI {
     
     // creates a frame, sets default close to soft close to catch crash
     JFrame frame = new JFrame("Code Cracker");
-    frame.setSize(new Dimension(850, 750));
+    frame.setSize(new Dimension(950, 750));
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     // creates an instance of CodeCracker and Levels
