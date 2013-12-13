@@ -23,7 +23,7 @@ public class CodeCrackerInstructionsPanel extends JPanel {
   private JTextArea instructionsText;
   
   // preferred sizes
-  private final int WIDTH = 850, HEIGHT = 750;
+  private final int WIDTH = 950, HEIGHT = 750;
   
   // constructor
   public CodeCrackerInstructionsPanel () {
