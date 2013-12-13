@@ -37,7 +37,7 @@ public class Level {
     this.name = name;
     message = mess;
     try{    
-      storyLine = new FileReader(storyFile);  
+      storyLine = new FileReader(storyFile);
     }catch(Exception e){
       System.out.println(e);
     }
