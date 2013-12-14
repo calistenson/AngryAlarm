@@ -32,11 +32,12 @@ public class CodeCrackerGamePanel extends JPanel {
   // for top
   private JLabel headerLabel;
   // for left panel
-  private JPanel leftPanel, l1Pane, l2Pane, l3Pane, l4Pane;
+  private JPanel leftPanel, labelPane, l1Pane, l2Pane, l3Pane, l4Pane;
   private JLabel levelsLabel;
   private JButton romeButton, tuscanyButton, veniceButton, quadButton, tupeloButton, hoopButton, tunnelsButton, clappButton;
   // for right panel
-  private JPanel rightPanel, instructPane, submitPane;
+  private JPanel rightPanel, instructPane, messagePane, imagePane, submitPane;
+  private JScrollPane storyPane;
   private JLabel instructLabel, messageLabel;
   private JTextField submitText;
   private JTextArea storyText;
@@ -59,9 +60,8 @@ public class CodeCrackerGamePanel extends JPanel {
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
     
     // starts with the top panel
-    headerLabel = new JLabel("<html><center>Welcome to Wendy Wellesley: Code Cracker!</center></html>");
-    headerLabel.setFont(new Font("Sans Serif", Font.PLAIN, 24));
-    headerLabel.setPreferredSize(new Dimension(850, 50));
+    headerLabel = new JLabel("Welcome to Wendy Wellesley: Code Cracker!");
+    headerLabel.setFont(new Font("Sans Serif", Font.PLAIN, 40));
     
     // creates left panel
     // nests Box Layout within panes of Flow Layout
@@ -71,6 +71,9 @@ public class CodeCrackerGamePanel extends JPanel {
     leftPanel.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 4));
     leftPanel.setBackground(new Color(76, 168, 194));
     // creates panes
+    //labelPane = new JPanel();
+    //labelPane.setOpaque(false);
+    //labelPane.setSize(new Dimension(415, 40));
     l1Pane = new JPanel();
     l1Pane.setOpaque(false);
     l2Pane = new JPanel();
@@ -80,8 +83,11 @@ public class CodeCrackerGamePanel extends JPanel {
     l4Pane = new JPanel();
     l4Pane.setOpaque(false);
     // creates componenets for left panel
-    levelsLabel = new JLabel("Levels");
-    levelsLabel.setFont(new Font("Sans Serif", Font.PLAIN, 50));
+    levelsLabel = new JLabel(" ");
+    levelsLabel.setPreferredSize(new Dimension(415, 60));
+    levelsLabel.setFont(new Font("Sans Serif", Font.PLAIN, 60));
+    levelsLabel.setForeground(new Color(76, 168, 194));
+    //System.out.println("LEVELS LABEL: " + levelsLabel.toString());
     romeButton = new JButton("Ancient Rome");
     romeButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
     romeButton.setPreferredSize(new Dimension(200, 100));
@@ -117,6 +123,7 @@ public class CodeCrackerGamePanel extends JPanel {
     tunnelsButton.addActionListener(listener);
     clappButton.addActionListener(listener);
     // adds panes
+    //labelPane.add(levelsLabel);
     l1Pane.add(romeButton);
     l2Pane.add(tuscanyButton);
     l2Pane.add(veniceButton);
@@ -137,22 +144,20 @@ public class CodeCrackerGamePanel extends JPanel {
    
     rightPanel = new JPanel();
     rightPanel.setPreferredSize(new Dimension(523, 700));
-    rightPanel.setLayout(new BorderLayout());
+    rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
     rightPanel.setBorder(BorderFactory.createLineBorder(new Color(186, 186, 186), 4));
     rightPanel.setBackground(new Color(76, 168, 194));
     // creates componenets for right panel
-    
-    //Lay out the label and scroll pane from top to bottom.
     instructPane = new JPanel();
-    instructPane.setAlignmentX(LEFT_ALIGNMENT);
-    instructPane.setLayout(new BoxLayout(instructPane, BoxLayout.PAGE_AXIS));
-    instructPane.setBackground(new Color(76, 168, 194));
+    
     
     instructLabel = new JLabel("<html><strong>Current level: " + game.getCurrentLevel().getName() + "</strong>. Read the storyline and click on the " 
                                  + game.getCurrentLevel().getCipher().getType() + " button in the instructions pane " 
                                  + "for more info on how to decrypt the cipher.</html>");
-    instructLabel.setPreferredSize(new Dimension(509, 180));
-    storyText = new JTextArea(20, 30);
+    instructLabel.setPreferredSize(new Dimension(509, 50));
+    instructPane.add(instructLabel);
+    
+    storyText = new JTextArea(7, 42);
     try {
       String content = new Scanner(graph.getRome().getStoryLine()).useDelimiter("\\A").next();
       storyText.setText(content);
@@ -160,57 +165,52 @@ public class CodeCrackerGamePanel extends JPanel {
     } catch (IOException e) {
       System.out.println("***ALERT***  Could not find or read from file! Error: " + e);
     }
-    messageLabel = new JLabel("Message: " + graph.getRome().getCipher().encrypt(graph.getRome().getMessage()));
+    storyPane = new JScrollPane(storyText);
+    storyText.setEditable(false);
+    storyPane.setBorder(BorderFactory.createEmptyBorder(0, 3, 3, 3));
     
-    instructPane.add(instructLabel);
-    instructPane.add(Box.createRigidArea(new Dimension(0,5)));
-    instructPane.add(storyText);
-    instructPane.add(Box.createRigidArea(new Dimension(0,5)));
-    instructPane.add(messageLabel);
-    instructPane.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
+    messagePane = new JPanel();
+    messageLabel = new JLabel("<html><strong>Encrypted message</strong>: " + graph.getRome().getCipher().encrypt(graph.getRome().getMessage()) + "</html>");
+    messagePane.add(messageLabel);
     
-    //submit pane
-    submitPane = new JPanel();
-    submitPane.setLayout(new BoxLayout(submitPane, BoxLayout.PAGE_AXIS));
-    submitPane.setBackground(new Color(76, 168, 194));
-    submitPane.setBorder(BorderFactory.createEmptyBorder(0, 3, 3, 3));
-    submitPane.add(Box.createHorizontalGlue());
-    
-    submitText = new JTextField(40);
-    submitButton = new JButton("Submit");
-    // adds listener to button
-    submitButton.addActionListener(listener);
-    
+    imagePane = new JPanel();
     try {
       detectiveImage = ImageIO.read(new File("Images/submitwoman.png"));
       detectiveLabel = new JLabel(new ImageIcon(detectiveImage));
-      submitPane.add(detectiveLabel);
+      imagePane.add(detectiveLabel);
     } catch (IOException e) {
       System.out.println("***ALERT***  Could not read or display image! Error: " + e);
     }
-    
-    submitPane.add(Box.createRigidArea(new Dimension(10, 0)));
+      
+    submitPane = new JPanel();
+    submitText = new JTextField(40);
+    submitButton = new JButton("Submit");
+    submitButton.addActionListener(listener);
     submitPane.add(submitText);
-    submitPane.add(Box.createRigidArea(new Dimension(10, 0)));
     submitPane.add(submitButton);
     
-    //adds panes to right panel
-    rightPanel.add(instructPane, BorderLayout.CENTER);
-    rightPanel.add(submitPane, BorderLayout.PAGE_END);
+    instructPane.setOpaque(false);
+    storyPane.setOpaque(false);
+    messagePane.setOpaque(false);
+    imagePane.setOpaque(false);
+    submitPane.setOpaque(false);
     
+    //instructPane.setPreferredSize(new Dimension(509, 70));
+    storyPane.setSize(new Dimension(509, 150));
+    //messagePane.setPreferredSize(new Dimension(509, 20));
+        
+    rightPanel.add(instructPane);
+    rightPanel.add(storyPane);
+    rightPanel.add(messagePane);
+    rightPanel.add(imagePane);
+    rightPanel.add(submitPane);
     
     
     // adds everything to GUI
     this.add(headerLabel, BorderLayout.PAGE_START);
     this.add(leftPanel, BorderLayout.LINE_START);
     this.add(rightPanel, BorderLayout.CENTER);
-    
   }
-  /*
-   public void paintComponent (Graphics page) {
-   super.paintComponent(page);
-   detectiveIcon.paintIcon(this, page, 0, 418);
-   } */
   
   
   private class CodeCrackerGamePanelListener implements ActionListener {

@@ -41,7 +41,8 @@ public class CodeCrackerGUI {
     codecracker.addTab("About", aboutPanel);
     codecracker.addTab("Instructions", instructionsPanel);
     codecracker.addTab("Game", gamePanel);
-    
+    //codecracker.addTab("Game", gamePanel);
+
     // misc
     frame.getContentPane().add(codecracker);
     
