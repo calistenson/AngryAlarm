@@ -7,12 +7,12 @@ import ciphers.VigenereCipher;
 import ciphers.AffineCipher;
 import ciphers.HillCipher;
 
-public class Levels {
+public class ContentGraph {
   
   private Level rome, tuscany, venice, quad, tupelo, hoop, tunnels, clapp;
   private AdjMatGraphPlus<Level> gameGraph;
   
-  public Levels () {
+  public ContentGraph () {
     CaesarCipher cc = new CaesarCipher(3);
     rome = new Level(cc, "Content/Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
     
@@ -36,7 +36,8 @@ public class Levels {
     Matrix shiftVal = new Matrix(shift);
     double[][] inv = new double[2][2]; 
     inv[0][0] = 15;
-    inv[0][1] = 8;
+    inv[0][
+           1] = 8;
     inv[1][0] = 8;
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
