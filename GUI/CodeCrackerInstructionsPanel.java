@@ -20,40 +20,38 @@ public class CodeCrackerInstructionsPanel extends JPanel {
   
   // instance vars
   private JButton caesarButton, vigButton, affineButton, hillButton;
-  private JTextArea instructionsText;
+  private ImagePanel instructionsPanel;
   
   // preferred sizes
   private final int WIDTH = 950, HEIGHT = 750;
+
   
   // constructor
   public CodeCrackerInstructionsPanel () {
     // sets up visuals
-    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // sets layout to Box Layout
-    this.setBackground(new Color(76, 168, 194)); // sets background color
+    setLayout(new BorderLayout());
+    this.setBackground(Color.BLACK); // sets background color
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
+    instructionsPanel = new ImagePanel(new ImageIcon("Images/Instructions.png").getImage());
+    instructionsPanel.setLayout(new GridLayout(2, 2));
+    instructionsPanel.setOpaque(false);
     
     // create and stylize new componenets
-    instructionsText = new JTextArea("This is where the instructions will be." +
-                                     "\nHere, we will place lots of text with instructions." +
-                                     "\nMaybe we could make buttons that make pop-up message boxes " +
-                                     "appear with instructions if it's too much to all fit here?");
-    instructionsText.setFont(new Font("Sans Serif", Font.PLAIN, 18)); // sets the font
-    instructionsText.setLineWrap(true);
-    instructionsText.setWrapStyleWord(true);
+   
     
-    caesarButton = new JButton("Caesar Cipher");
+    caesarButton = new JButton("C");
     caesarButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
     caesarButton.setPreferredSize(new Dimension(200, 100));
     
-    vigButton = new JButton("Vigenere Cipher");
+    vigButton = new JButton("V");
     vigButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
     vigButton.setPreferredSize(new Dimension(200, 100));
     
-    affineButton = new JButton("Affine Cipher");
+    affineButton = new JButton("A");
     affineButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
     affineButton.setPreferredSize(new Dimension(200, 100));
     
-    hillButton = new JButton("Hill Cipher");
+    hillButton = new JButton("H");
     hillButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
     hillButton.setPreferredSize(new Dimension(200, 100));
     
@@ -64,11 +62,11 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     hillButton.addActionListener(listener);
     
     // add everything to frame
-    this.add(instructionsText);
-    this.add(caesarButton);
-    this.add(vigButton);
-    this.add(affineButton);
-    this.add(hillButton);
+    instructionsPanel.add(caesarButton);
+    instructionsPanel.add(vigButton);
+    instructionsPanel.add(affineButton);
+    instructionsPanel.add(hillButton);
+    this.add(instructionsPanel, BorderLayout.LINE_START);
     
   }
   
