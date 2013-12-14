@@ -60,11 +60,15 @@ public class CaesarCipher extends Cipher{
     int newIndex;
     String encrypted = "";
     message = message.toUpperCase();
-    char[] messageLet = message.toCharArray();
-    for(int i=0; i<message.length(); i++){
-      newIndex = messageLet[i] + shiftVal;
-      newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
-      encrypted += (char) newIndex;
+    String[] words = message.split(" ");
+    for(int i=0; i<words.length; i++){
+      String word = words[i];
+      char[] messageLet = word.toCharArray();
+      for(int j=0; j<message.length(); j++){
+        newIndex = messageLet[j] + shiftVal;
+        newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
+        encrypted += (char) newIndex;
+      } encrypted += " ";
     }
     return encrypted;
   }
@@ -80,11 +84,15 @@ public class CaesarCipher extends Cipher{
     int newIndex;
     String decrypted = "";
     message = message.toUpperCase();
-    char[] messageLet = message.toCharArray();
-    for(int i=0; i<message.length(); i++){
-      newIndex = messageLet[i] - shiftVal;
-      newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
-      decrypted += (char) newIndex;
+    String[] words = message.split(" ");
+    for(int i=0; i<words.length; i++){
+      String word = words[i];
+      char[] messageLet = word.toCharArray();
+      for(int j=0; j<messageLet.length; j++){
+        newIndex = messageLet[j] - shiftVal;
+        newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
+        decrypted += (char) newIndex;
+      } decrypted += " ";
     }
     return decrypted;
   }
@@ -111,7 +119,7 @@ public class CaesarCipher extends Cipher{
     System.out.println("Encrypt CALI using Caesar with shift value of 26: ");
     System.out.println(c.encrypt("CALI"));
     System.out.println("Decrypt CALI using Caesar with shift value of 26: ");
-    System.out.println(c.decrypt("CALI"));
+    System.out.println(c.decrypt("CALI Stenson"));
     
   }//end main  
 }
