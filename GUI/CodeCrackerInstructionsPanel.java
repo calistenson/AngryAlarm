@@ -15,6 +15,10 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.event.*;
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.filechooser.FileFilter;
+import javax.imageio.ImageIO;
 
 public class CodeCrackerInstructionsPanel extends JPanel {
   
@@ -24,7 +28,7 @@ public class CodeCrackerInstructionsPanel extends JPanel {
   
   // preferred sizes
   private final int WIDTH = 950, HEIGHT = 750;
-
+  
   
   // constructor
   public CodeCrackerInstructionsPanel () {
@@ -37,13 +41,13 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     instructionsPanel.setOpaque(false);
     
     // create and stylize new componenets
-   
+    
     
     caesarButton = new JButton("");
     caesarButton.setOpaque(false);
     caesarButton.setContentAreaFilled(false);
     caesarButton.setBorderPainted(false);
-
+    
     vigButton = new JButton("");
     vigButton.setOpaque(false);
     vigButton.setContentAreaFilled(false);
@@ -77,14 +81,24 @@ public class CodeCrackerInstructionsPanel extends JPanel {
   private class CodeCrackerInstructionsPanelListener implements ActionListener {
     
     public void actionPerformed(ActionEvent event) {
-      if (event.getSource() == caesarButton) {
-        JOptionPane.showMessageDialog(null, "Here is where instructions for the Caesar Cipher could be placed.");
-      } else if (event.getSource() == vigButton) {
-        JOptionPane.showMessageDialog(null, "Here is where instructions for the Vigenere Cipher could be placed.");
-      } else if (event.getSource() == affineButton) {
-        JOptionPane.showMessageDialog(null, "Here is where instructions for the Affine Cipher could be placed.");
-      } else if (event.getSource() == hillButton) {
-        JOptionPane.showMessageDialog(null, "Here is where instructions for the Hill Cipher could be placed.");
+      if (event.getSource() == caesarButton || event.getSource() == vigButton 
+            ||  event.getSource() == affineButton ||  event.getSource() == hillButton) {
+        File instructions;
+        if (event.getSource() == caesarButton) {
+          instructions = new File("Content/Caesar.txt");
+        } else if (event.getSource() == vigButton) {
+          instructions = new File("Content/Vigenere.txt");
+        } else if (event.getSource() == affineButton) {
+          instructions = new File("Content/Affine.txt");
+        } else { // if (event.getSource() == hillButton)
+          instructions = new File("Content/Hill.txt");
+        }
+        try {
+        String content = new Scanner(instructions).useDelimiter("\\A").next();
+        JOptionPane.showMessageDialog(null, content);
+        } catch (IOException e) {
+          System.out.println("**ERROR**: " + e);
+        }
       }
       
     }
