@@ -12,32 +12,37 @@ import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
 
-public class CodeCrackerGUI {
 
+
+public class CodeCrackerGUI {
+  
   
   public static void main (String[] args) {
     
     
     // creates a frame, sets default close to soft close to catch crash
     JFrame frame = new JFrame("Code Cracker");
-    frame.setSize(new Dimension(850, 750));
+    frame.setSize(new Dimension(950, 750));
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
-    // creates an instance of CodeCracker
-    // CodeCracker game = new CodeCracker(); //edit this once CodeCracker class is written
+    // creates an instance of CodeCracker and Levels
+    Levels graph = new Levels();
+    CodeCracker game = new CodeCracker(graph.getGameGraph());
+    
     
     // creates panels
     CodeCrackerAboutPanel aboutPanel = new CodeCrackerAboutPanel();
     CodeCrackerInstructionsPanel instructionsPanel = new CodeCrackerInstructionsPanel();
-    CodeCrackerGamePanel gamePanel = new CodeCrackerGamePanel(); //(game);
+    CodeCrackerGamePanel gamePanel = new CodeCrackerGamePanel(game, graph);
     
-    // creates tabbed pane and
+    // creates tabbed pane
     // adds tabbed panels to frame
     JTabbedPane codecracker = new JTabbedPane();
     codecracker.addTab("About", aboutPanel);
     codecracker.addTab("Instructions", instructionsPanel);
     codecracker.addTab("Game", gamePanel);
-    
+    //codecracker.addTab("Game", gamePanel);
+
     // misc
     frame.getContentPane().add(codecracker);
     

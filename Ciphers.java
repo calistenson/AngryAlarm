@@ -159,7 +159,7 @@ public class Ciphers{
   }
   
   public String decryptHill(Matrix keyInverse, Matrix shiftVal, String message){
-
+    
     char[] messLets = message.toCharArray();
     int[] charVals = new int[messLets.length];
     String decrypted = "";
@@ -231,7 +231,7 @@ public class Ciphers{
     k[1][1] = 1;
     System.out.println(c.decryptHill(key, shiftVal, "HE"));
     
-
+    
     
   }//end main()
   

@@ -1,0 +1,3 @@
+Searching deep in the archives of Clapp Library to find a topic for your final history paper, you come across a mysterious notebook entitled "Code Cracker." Interested, you open it -- only to discover the magic of the notebook as it transports you back in time. First stop: ancient Rome. 
+
+The year is 44 BC, and you are a member of a secret detective group. A month previous -- on the Ides of March -- a group of Roman allegedly stabbed Julius Caesar, Dictator of the Republic, to death. However, your small posse of detectives suspects a cover-up. Was Caesar a co-conspirator in his own murder? To discover the answer decode the message found on Caesar's dresser using the Caesar Cipher.

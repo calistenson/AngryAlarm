@@ -57,34 +57,48 @@ public class CodeCracker {
   public void chooseNewLevel(Level l){
     if(levels.isArc(current, l) && levelAccomplished){
       current = l;
+      levelAccomplished = false;
     }else if(!levelAccomplished){
       System.out.println("Please complete current level");
     }else{
       System.out.println("Please choose appropriate level");
     }
-  }  
+  }
+  
+  public boolean chooseLevelFromPause(Level last, Level next, String s){
+    if (last.getMessage().equals(s)) {
+      current = next;
+      levelAccomplished = false;
+      return true;
+    }
+    return false;
+  }
   
   public String codedMessage(Level l){
     String message = l.getMessage();
     String coded = codes.get(message);
     return coded;
   }  
-    
-    
+  
+  public Level getCurrentLevel() {
+    return current;
+  }
+  
+  
   
   public static void main(String[] args) { 
     //(Cipher c, String storyFile, String name, String mess)
-    Level one = new Level(new CaesarCipher(3), "Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
+    Level rome = new Level(new CaesarCipher(3), "Content/Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
     
     VigenereCipher vc = new VigenereCipher("Wendy");
-    Level twoA = new Level(vc, "Tuscany.txt", "Tuscany", "The Medici family kills all who protest to their power.");
-    Level twoB = new Level(vc, "Venice.txt", "Venice", "The pirates attacked our ship! We need reinforcements.");
+    Level tuscany = new Level(vc, "Content/Tuscany.txt", "Tuscany", "The Medici family kills all who protest to their power.");
+    Level venice = new Level(vc, "Content/Venice.txt", "Venice", "The pirates attacked our ship! We need reinforcements.");
     
     AffineCipher ac = new AffineCipher(9, 3, 3);
-    Level threeA = new Level(ac, "Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower! First person to the top gets ice cream!");
-    Level threeB = new Level(ac, "Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
-    Level threeC = new Level(ac, "Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos.");
-    Level threeD = new Level(ac, "Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos!");
+    Level quad = new Level(ac, "Content/Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower! First person to the top gets ice cream!");
+    Level tupelo = new Level(ac, "Content/Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
+    Level hoop = new Level(ac, "Content/Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos.");
+    Level tunnels = new Level(ac, "Content/Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos!");
     
     double[][] k = new double[2][2];
     k[0][0] = 9;
@@ -101,38 +115,38 @@ public class CodeCracker {
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
     HillCipher hc = new HillCipher(key, shiftVal, keyInv);
-    Level four = new Level(hc, "New Jersey Princeton University.txt", "Jersey", "HI");
+    Level clapp = new Level(hc, "Content/Clapp_Library.txt", "Clapp Library", "HI");
     
     AdjMatGraphPlus<Level> gameGraph = new AdjMatGraphPlus<Level>();
-    gameGraph.addVertex(one);
-    gameGraph.addVertex(twoA);
-    gameGraph.addVertex(twoB);
-    gameGraph.addVertex(threeA);
-    gameGraph.addVertex(threeB);
-    gameGraph.addVertex(threeC);
-    gameGraph.addVertex(threeD);
-    gameGraph.addVertex(four);
+    gameGraph.addVertex(rome);
+    gameGraph.addVertex(tuscany);
+    gameGraph.addVertex(venice);
+    gameGraph.addVertex(quad);
+    gameGraph.addVertex(tupelo);
+    gameGraph.addVertex(hoop);
+    gameGraph.addVertex(tunnels);
+    gameGraph.addVertex(clapp);
     
-    gameGraph.addArc(one, twoA);
-    gameGraph.addArc(one, twoB);
-    gameGraph.addArc(twoA, threeA);
-    gameGraph.addArc(twoA, threeB);
-    gameGraph.addArc(twoB, threeC);
-    gameGraph.addArc(twoB, threeD);
-    gameGraph.addArc(threeA, four);
-    gameGraph.addArc(threeB, four);
-    gameGraph.addArc(threeC, four);
-    gameGraph.addArc(threeD, four);
+    gameGraph.addArc(rome, tuscany);
+    gameGraph.addArc(rome, venice);
+    gameGraph.addArc(tuscany, quad);
+    gameGraph.addArc(tuscany, tupelo);
+    gameGraph.addArc(venice, hoop);
+    gameGraph.addArc(venice, tunnels);
+    gameGraph.addArc(quad, clapp);
+    gameGraph.addArc(tupelo, clapp);
+    gameGraph.addArc(hoop, clapp);
+    gameGraph.addArc(tunnels, clapp);
     
     CodeCracker game = new CodeCracker(gameGraph);
     game.playLevel("Beware of the Ides of March");
-    game.chooseNewLevel(twoA);
+    game.chooseNewLevel(tuscany);
     game.playLevel("The Medici family kills all who protest to their power.");
-    game.chooseNewLevel(threeA);
+    game.chooseNewLevel(quad);
     game.playLevel("Storm the tower! First person to the top gets ice cream!");
     game.playLevel("ladsfjsaldfjsdjf");
     
-                             
+    
     
     
   }

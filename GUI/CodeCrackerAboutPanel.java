@@ -15,31 +15,54 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.event.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage; 
+import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.filechooser.FileFilter;
+import javax.imageio.ImageIO;
+
 
 public class CodeCrackerAboutPanel extends JPanel {
   
   // instance vars
+  private ImagePanel aboutPanel;
+  private ReboundPanel sigsPanel;
+  private JLabel sigsLabel;
+  private BufferedImage sigsImage;
   
   // preferred sizes
-  private final int WIDTH = 850, HEIGHT = 750;
-  private JLabel womanImage;
+  private final int WIDTH = 950, HEIGHT = 750;
   
   // constructor
   public CodeCrackerAboutPanel () {
     // sets up visuals
-    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // sets layout to Box Layout
+    //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // sets layout to Box Layout
+    setLayout(new BorderLayout());
     // whateverlabel.setFont(new Font("Serif", Font.PLAIN, 18)); // sets the font
     this.setBackground(new Color(76, 168, 194)); // sets background color
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
+    aboutPanel = new ImagePanel(new ImageIcon("Images/About.png").getImage());
+    aboutPanel.setLayout(new BoxLayout(aboutPanel, BoxLayout.Y_AXIS));
+    sigsPanel = new ReboundPanel();
+    sigsPanel.setPreferredSize(new Dimension(WIDTH, 150));
+    sigsPanel.setOpaque(false);
+    /*try {
+      sigsImage = ImageIO.read(new File("Images/sigs.png"));
+      sigsLabel = new JLabel(new ImageIcon(sigsImage));
+      aboutPanel.add(sigsLabel);
+      System.out.println("*SIGS ADDED YALL*");
+    } catch (IOException e) {
+      System.out.println("***ALERT***  Could not read or display image! Error: " + e);
+    }*/
     
-    womanImage = new JLabel();
-    womanImage.setIcon(new ImageIcon ("woman-final.gif"));
-    womanImage.setLayout(new FlowLayout(FlowLayout.LEFT));
+    this.add(aboutPanel, BorderLayout.LINE_START);
+    this.add(sigsPanel, BorderLayout.PAGE_END);
     
-    this.add(womanImage);
-              
+    
+    
   }
   
-
+  
   
 }

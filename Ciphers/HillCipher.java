@@ -39,9 +39,9 @@ public class HillCipher extends Cipher{
    * @param inv Matrix
    */ 
   public HillCipher(Matrix k, Matrix s, Matrix inv) {
-      key = k;
-      shiftVal = s;
-      keyInverse = inv;
+    key = k;
+    shiftVal = s;
+    keyInverse = inv;
   } 
   
   /**
@@ -100,7 +100,7 @@ public class HillCipher extends Cipher{
    * Defined abstract method inherited from Cipher.java
    * Encodes messages for Hill Ciphers.
    */   
- public String encrypt(String message){
+  public String encrypt(String message){
     char[] messLets = message.toCharArray();//allows each charactor to be encrypted in pairs
     int[] charVals = new int[messLets.length];//used to store letters as integers from 0 (A) to 26 (Z)
     String encrypted = "";
@@ -140,15 +140,15 @@ public class HillCipher extends Cipher{
     
   }
   
-   /**
-    * decrypt()
-    * @param message String
-    * @return String
-    * Defined abstract method inherited from Cipher.java
-    * Decodes messages for Hill Ciphers.
-    */ 
+  /**
+   * decrypt()
+   * @param message String
+   * @return String
+   * Defined abstract method inherited from Cipher.java
+   * Decodes messages for Hill Ciphers.
+   */ 
   public String decrypt(String message){
-
+    
     char[] messLets = message.toCharArray();
     int[] charVals = new int[messLets.length];
     String decrypted = "";
@@ -188,12 +188,16 @@ public class HillCipher extends Cipher{
     
   }
   
+  public String getType() {
+    return "Caesar Cipher";
+  }
+  
   /**
    * main()
    * for testing
    */
   public static void main(String[] args) {
-  
+    
     
     double[][] k = new double[2][2];
     k[0][0] = 9;

@@ -70,12 +70,12 @@ public class CaesarCipher extends Cipher{
   }
   
   /**
-    * decrypt()
-    * @param message String
-    * @return String
-    * Defined abstract method inherited from Cipher.java
-    * Decodes messages for Caesar Ciphers.
-    */ 
+   * decrypt()
+   * @param message String
+   * @return String
+   * Defined abstract method inherited from Cipher.java
+   * Decodes messages for Caesar Ciphers.
+   */ 
   public String decrypt(String message){
     int newIndex;
     String decrypted = "";
@@ -87,6 +87,10 @@ public class CaesarCipher extends Cipher{
       decrypted += (char) newIndex;
     }
     return decrypted;
+  }
+  
+  public String getType() {
+    return "Caesar Cipher";
   }
   
   /**
@@ -108,7 +112,6 @@ public class CaesarCipher extends Cipher{
     System.out.println(c.encrypt("CALI"));
     System.out.println("Decrypt CALI using Caesar with shift value of 26: ");
     System.out.println(c.decrypt("CALI"));
-  
+    
   }//end main  
 }
-  

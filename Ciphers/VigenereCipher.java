@@ -33,7 +33,7 @@ public class VigenereCipher extends Cipher{
    * when they create the VigenereCipher object.
    */ 
   public VigenereCipher(String key){
-     keyword = key;
+    keyword = key;
   }
   
   /**
@@ -62,7 +62,7 @@ public class VigenereCipher extends Cipher{
    * Defined abstract method inherited from Cipher.java
    * Encodes messages for Vigenere Ciphers.
    */ 
-   public String encrypt(String message){
+  public String encrypt(String message){
     int newIndex;
     int p = 0; //index of the password added to message char
     int shiftVal = 0; //shift for the message char
@@ -79,13 +79,13 @@ public class VigenereCipher extends Cipher{
     return encrypted;
   }
   
-   /**
-    * decrypt()
-    * @param message String
-    * @return String
-    * Defined abstract method inherited from Cipher.java
-    * Decodes messages for Vigenere Ciphers.
-    */ 
+  /**
+   * decrypt()
+   * @param message String
+   * @return String
+   * Defined abstract method inherited from Cipher.java
+   * Decodes messages for Vigenere Ciphers.
+   */ 
   public String decrypt(String message){
     int newIndex;
     int p = 0; //index of the password added to message char
@@ -101,6 +101,10 @@ public class VigenereCipher extends Cipher{
       p = (p+1) % keyword.length();
     }
     return decrypted;
+  }
+  
+  public String getType() {
+    return "Caesar Cipher";
   }
   
   /**
