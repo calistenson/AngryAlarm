@@ -1,0 +1,45 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ReboundPanel extends JPanel {
+  
+  private final int WIDTH = 300, HEIGHT = 100;
+  private final int DELAY = 60, IMAGE_SIZE = 35;
+  
+  private ImageIcon image;
+  private Timer timer;
+  private int x, y, moveX;
+  
+  public ReboundPanel() {
+    timer = new Timer(DELAY, new ReboundListener());
+    
+    image = new ImageIcon ("sigs.png");
+    
+    x = 0;
+    y = 40;
+    moveX = 3;
+    
+    setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    setBackground(Color.black);
+    timer.start();
+  }
+  
+  public void paintComponent(Graphics page) {
+    super.paintComponent(page);
+    image.paintIcon(this, page, x, y);
+  }
+  
+  private class ReboundListener implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
+      x += moveX;
+      
+      if (x <= 0 || x >= WIDTH-IMAGE_SIZE)
+        moveX = moveX * -1;
+      
+      repaint();
+    }
+  }
+}
+    
+    
