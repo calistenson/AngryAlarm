@@ -39,21 +39,25 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     // create and stylize new componenets
    
     
-    caesarButton = new JButton("C");
-    caesarButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
-    caesarButton.setPreferredSize(new Dimension(200, 100));
+    caesarButton = new JButton("");
+    caesarButton.setOpaque(false);
+    caesarButton.setContentAreaFilled(false);
+    caesarButton.setBorderPainted(false);
+
+    vigButton = new JButton("");
+    vigButton.setOpaque(false);
+    vigButton.setContentAreaFilled(false);
+    vigButton.setBorderPainted(false);
     
-    vigButton = new JButton("V");
-    vigButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
-    vigButton.setPreferredSize(new Dimension(200, 100));
+    affineButton = new JButton("");
+    affineButton.setOpaque(false);
+    affineButton.setContentAreaFilled(false);
+    affineButton.setBorderPainted(false);
     
-    affineButton = new JButton("A");
-    affineButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
-    affineButton.setPreferredSize(new Dimension(200, 100));
-    
-    hillButton = new JButton("H");
-    hillButton.setFont(new Font("Sans Serif", Font.PLAIN, 12));
-    hillButton.setPreferredSize(new Dimension(200, 100));
+    hillButton = new JButton("");
+    hillButton.setOpaque(false);
+    hillButton.setContentAreaFilled(false);
+    hillButton.setBorderPainted(false);
     
     CodeCrackerInstructionsPanelListener listener = new CodeCrackerInstructionsPanelListener();
     caesarButton.addActionListener(listener);
@@ -64,8 +68,8 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     // add everything to frame
     instructionsPanel.add(caesarButton);
     instructionsPanel.add(vigButton);
-    instructionsPanel.add(affineButton);
     instructionsPanel.add(hillButton);
+    instructionsPanel.add(affineButton);
     this.add(instructionsPanel, BorderLayout.LINE_START);
     
   }
