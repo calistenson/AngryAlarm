@@ -139,7 +139,7 @@ public class AffineCipher extends Cipher {
   }
   
   public String getType() {
-    return "Caesar Cipher";
+    return "Affine Cipher";
   }
   
   /**
@@ -152,6 +152,7 @@ public class AffineCipher extends Cipher {
     
     System.out.println(c.decrypt(c.encrypt("CALI Stenson"))); 
     System.out.println(c.decrypt(c.encrypt("SUPERCALIFRAGILISTICEXPIALADOCIOUS")));
+    System.out.println(c.encrypt("The pirates attacked our ship we need reinforcements"));
     
     //needs more testing
   }//end main

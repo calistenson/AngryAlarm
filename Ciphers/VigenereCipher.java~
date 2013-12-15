@@ -68,13 +68,17 @@ public class VigenereCipher extends Cipher{
     int shiftVal = 0; //shift for the message char
     String encrypted = "";
     message = message.toUpperCase();
-    char[] messageLet = message.toCharArray();
-    for(int i=0; i<message.length(); i++){
-      shiftVal = (int) keyword.charAt(p) - 'A';
-      newIndex = messageLet[i] + shiftVal;
-      newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
-      encrypted += (char) newIndex;
-      p = (p+1) % keyword.length();
+    String[] words = message.split(" ");
+    for(int i=0; i<words.length; i++){
+      String word = words[i];
+      char[] messageLet = word.toCharArray();
+      for(int j=0; j<messageLet.length; j++){
+        shiftVal = (int) keyword.charAt(p) - 'A';
+        newIndex = messageLet[j] + shiftVal;
+        newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
+        encrypted += (char) newIndex;
+        p = (p+1) % keyword.length();
+      } encrypted += " ";
     }
     return encrypted;
   }
@@ -92,13 +96,17 @@ public class VigenereCipher extends Cipher{
     int shiftVal = 0; //shift for the message char
     String decrypted = "";
     message = message.toUpperCase();
-    char[] messageLet = message.toCharArray();
-    for(int i=0; i<message.length(); i++){
-      shiftVal = (int) keyword.charAt(p) - 'A';
-      newIndex = messageLet[i] - shiftVal;
-      newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
-      decrypted += (char) newIndex;
-      p = (p+1) % keyword.length();
+    String[] words = message.split(" ");
+    for(int i=0; i<words.length; i++){
+      String word = words[i];
+      char[] messageLet = word.toCharArray();
+      for(int j=0; j<messageLet.length; j++){
+        shiftVal = (int) keyword.charAt(p) - 'A';
+        newIndex = messageLet[j] - shiftVal;
+        newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
+        decrypted += (char) newIndex;
+        p = (p+1) % keyword.length();
+      } decrypted += " ";
     }
     return decrypted;
   }
@@ -113,13 +121,13 @@ public class VigenereCipher extends Cipher{
    */ 
   public static void main(String[] args){
     VigenereCipher deflt = new VigenereCipher(); //tests the default construtor of class
-    System.out.println("Encoded then decode CALI: " + deflt.decrypt(deflt.encrypt("CALI")));
+    System.out.println("Encoded then decode CALI: " + deflt.encrypt(deflt.decrypt("CALI")));
     
     VigenereCipher otherConstruct = new VigenereCipher("LEMON");//tests the other constructor of the class
-    System.out.println("Encrypt ATTACKATDAWN using Vigenere with LEMON as a keyword (should result in LXFOPVEFRNHR):");
-    System.out.println(otherConstruct.encrypt("ATTACKATDAWN"));
+    System.out.println("Encrypt ATTACK AT DAWN using Vigenere with LEMON as a keyword (should result in LXFOPV EF RNHR):");
+    System.out.println(otherConstruct.encrypt("ATTACK AT DAWN"));
     System.out.println("Decrypt LXFOPVEFRNHR using Vigenere with LEMON as a keyword (should result in ATTACKATDAWN):"); 
-    System.out.println(otherConstruct.decrypt("LXFOPVEFRNHR"));
+    System.out.println(otherConstruct.decrypt("LXFOPV EF RNHR"));
     
   }//end main
   

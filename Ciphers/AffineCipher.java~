@@ -100,11 +100,16 @@ public class AffineCipher extends Cipher {
     int newIndex;
     String encrypted = "";
     message = message.toUpperCase();
-    char[] messageLet = message.toCharArray();
-    for(int i=0; i<message.length(); i++){
-      newIndex = 'A' + ( (keyVal * (messageLet[i]-'A') + shiftVal) % 26);
-      newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
-      encrypted += (char) newIndex;
+    String[] words = message.split(" ");
+    for(int i=0; i<words.length; i++){
+      String word = words[i];
+      char[] messageLet = word.toCharArray();
+      for(int j=0; j<messageLet.length; j++){
+        newIndex = 'A' + ( (keyVal * (messageLet[j]-'A') + shiftVal) % 26);
+        newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
+        encrypted += (char) newIndex;
+      }
+      encrypted += " ";
     }
     return encrypted;
   }
@@ -120,11 +125,15 @@ public class AffineCipher extends Cipher {
     int newIndex;
     String decrypted = "";
     message = message.toUpperCase();
-    char[] messageLet = message.toCharArray();
-    for(int i=0; i<message.length(); i++){
-      newIndex = 'A' + (keyInverse*((messageLet[i] - 'A') - shiftVal)) % 26;
-      newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
-      decrypted += (char) newIndex;
+    String[] words = message.split(" ");
+    for(int i=0; i<words.length; i++){
+      String word = words[i];
+      char[] messageLet = word.toCharArray();
+      for(int j=0; j<messageLet.length; j++){
+        newIndex = 'A' + (keyInverse*((messageLet[j] - 'A') - shiftVal)) % 26;
+        newIndex = ((newIndex < 'A') ? 'Z'-('A'-newIndex)+1: newIndex);
+        decrypted += (char) newIndex;
+      } decrypted += " "; 
     }
     return decrypted;
   }
@@ -141,7 +150,7 @@ public class AffineCipher extends Cipher {
     
     AffineCipher c = new AffineCipher(9, 3, 3);
     
-    System.out.println(c.decrypt(c.encrypt("CALI"))); 
+    System.out.println(c.decrypt(c.encrypt("CALI Stenson"))); 
     System.out.println(c.decrypt(c.encrypt("SUPERCALIFRAGILISTICEXPIALADOCIOUS")));
     
     //needs more testing

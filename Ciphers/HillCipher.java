@@ -178,7 +178,7 @@ public class HillCipher extends Cipher{
       }else{
         double[] charval = {(double)charVals[0], (double)charVals[1]};
         Matrix letters = new Matrix(charval, 2);
-        Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
+        Matrix decrptd = (keyInverse.times(letters.minus(shiftVal)));
         newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
         decrypted += (char) newIndex;
         System.out.println(message + " odd letter " + (char)newIndex); 
@@ -200,7 +200,7 @@ public class HillCipher extends Cipher{
   }
   
   public String getType() {
-    return "Caesar Cipher";
+    return "Hill Cipher";
   }
   
   /**
@@ -229,7 +229,7 @@ public class HillCipher extends Cipher{
     System.out.println(c.decrypt("HE SMRC"));
     System.out.println(c.decrypt("HE"));
     System.out.println(c.decrypt(c.encrypt("EL")));
-    
+    //Odd string still don't work...
   }//end main
   
   

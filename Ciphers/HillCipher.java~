@@ -101,39 +101,45 @@ public class HillCipher extends Cipher{
    * Encodes messages for Hill Ciphers.
    */   
   public String encrypt(String message){
-    char[] messLets = message.toCharArray();//allows each charactor to be encrypted in pairs
-    int[] charVals = new int[messLets.length];//used to store letters as integers from 0 (A) to 26 (Z)
+    message = message.toUpperCase();
+    String[] words = message.split(" ");
     String encrypted = "";
-    int newIndex = 0;
-    for(int i=0; i<messLets.length; i++){//fills the charVals array
-      charVals[i] = messLets[i] - 'A';
-    }
-    if(charVals.length % 2 == 0){//length of message is even and letters can be encoded in pairs
-      for(int i=0; i<charVals.length-1; i++){
-        double[] charval = {(double)charVals[i], charVals[i+1]};
-        Matrix letters = new Matrix(charval, 2);
-        Matrix encrptd = (key.times(letters)).plus(shiftVal);
-        newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
-        encrypted += (char) newIndex;
-        newIndex = 'A' + (int)(encrptd.get(1,0) % 26);
-        encrypted += (char) newIndex;
+    for(int i=0; i<words.length; i++){
+      String word = words[i];
+      char[] messageLet = word.toCharArray();//allows each charactor to be encrypted in pairs
+      int[] charVals = new int[messageLet.length];//used to store letters as integers from 0 (A) to 26 (Z)
+      int newIndex = 0;
+      for(int j=0; j<messageLet.length; j++){//fills the charVals array
+        charVals[j] = messageLet[j] - 'A';
       }
-    }else{//length of message is odd and first letter is encoded separately.
-      double[] charval = {(double)charVals[0], -1};
-      Matrix letters = new Matrix(charval, 2);
-      Matrix encrptd = (key.times(letters)).plus(shiftVal);
-      newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
-      encrypted += (char) newIndex;
-      for(int i=1; i<charVals.length-1; i++){
-        charval[0] = (double)charVals[i];
-        charval[1] = charVals[i+1];
-        letters = new Matrix(charval, 2);
-        encrptd = (key.times(letters)).plus(shiftVal);
-        newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
-        encrypted += (char) newIndex;
-        newIndex = 'A' + (int)(encrptd.get(1,0) % 26);
-        encrypted += (char) newIndex;
+     if(charVals.length % 2 == 0){//length of message is even and letters can be encoded in pairs
+       for(int k=0; k<charVals.length-1; k+=2){
+         double[] charval = {(double)charVals[k], charVals[k+1]};
+         Matrix letters = new Matrix(charval, 2);
+         Matrix encrptd = (key.times(letters)).plus(shiftVal);
+         newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
+         encrypted += (char) newIndex;
+         newIndex = 'A' + (int)(encrptd.get(1,0) % 26);
+         encrypted += (char) newIndex;
+       }
+     }else{//length of message is odd and first letter is encoded separately.
+       double[] charval = {(double)charVals[0], (double)charVals[1]};
+       Matrix letters = new Matrix(charval, 2);
+       Matrix encrptd = (key.times(letters)).plus(shiftVal);
+       newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
+       encrypted += (char) newIndex;
+       System.out.println(message + " odd letter " + (char)newIndex); 
+       for(int k=1; k<charVals.length-1; k+=2){
+         charval[0] = (double)charVals[k];
+         charval[1] = charVals[k+1];
+         letters = new Matrix(charval, 2);
+         encrptd = (key.times(letters)).plus(shiftVal);
+         newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
+         encrypted += (char) newIndex;
+         newIndex = 'A' + (int)(encrptd.get(1,0) % 26);
+         encrypted += (char) newIndex;
       }
+     } encrypted += " ";  
     }
     
     return encrypted;
@@ -148,40 +154,45 @@ public class HillCipher extends Cipher{
    * Decodes messages for Hill Ciphers.
    */ 
   public String decrypt(String message){
-    
-    char[] messLets = message.toCharArray();
-    int[] charVals = new int[messLets.length];
+    message = message.toUpperCase();
+    String[] words = message.split(" "); 
     String decrypted = "";
-    int newIndex = 0;
-    for(int i=0; i<messLets.length; i++){
-      charVals[i] = messLets[i] - 'A';
-    }
-    if(charVals.length % 2 == 0){
-      for(int i=0; i<charVals.length-1; i++){
-        double[] charval = {(double)charVals[i], charVals[i+1]};
+    for(int i=0; i<words.length; i++){
+      int newIndex = 0;
+      String word = words[i];
+      char[] messageLet = word.toCharArray();//allows each charactor to be encrypted in pairs
+      int[] charVals = new int[messageLet.length];//used to store letters as integers from 0 (A) to 26 (Z)
+      for(int j=0; j<messageLet.length; j++){
+       charVals[j] = messageLet[j] - 'A';
+      }
+      if(charVals.length % 2 == 0){
+        for(int k=0; k<charVals.length-1; k+=2){
+          double[] charval = {(double)charVals[k], (double)charVals[k+1]};
+          Matrix letters = new Matrix(charval, 2);
+          Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
+          newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
+          decrypted += (char) newIndex;
+          newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
+          decrypted += (char) newIndex;
+        }
+      }else{
+        double[] charval = {(double)charVals[0], (double)charVals[1]};
         Matrix letters = new Matrix(charval, 2);
-        Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
+        Matrix decrptd = (keyInverse.times(letters.minus(shiftVal)));
         newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
         decrypted += (char) newIndex;
-        newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
-        decrypted += (char) newIndex;
-      }
-    }else{
-      double[] charval = {(double)charVals[0], -1};
-      Matrix letters = new Matrix(charval, 2);
-      Matrix decrptd = keyInverse.times(letters.minus(shiftVal));
-      newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
-      decrypted += (char) newIndex;
-      for(int i=1; i<charVals.length-1; i++){
-        charval[0] = (double)charVals[i];
-        charval[1] = charVals[i+1];
-        letters = new Matrix(charval, 2);
-        decrptd = (keyInverse.times(letters.minus(shiftVal)));
-        newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
-        decrypted += (char) newIndex;
-        newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
-        decrypted += (char) newIndex;
-      }
+        System.out.println(message + " odd letter " + (char)newIndex); 
+        for(int k=1; k<charVals.length-1; k+=2){
+          charval[0] = (double)charVals[k];
+          charval[1] = (double) charVals[k+1];
+          letters = new Matrix(charval, 2);
+          decrptd = (keyInverse.times(letters.minus(shiftVal)));
+          newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
+          decrypted += (char) newIndex;
+          newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
+          decrypted += (char) newIndex;
+        } 
+      }  decrypted += " ";  
     }
     
     return decrypted;
@@ -214,9 +225,11 @@ public class HillCipher extends Cipher{
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
     HillCipher c = new HillCipher(key, shiftVal, keyInv);
-    System.out.println(c.encrypt("HI"));
+    System.out.println(c.decrypt(c.encrypt("HI CALI ANd CLARA")));
+    System.out.println(c.decrypt("HE SMRC"));
     System.out.println(c.decrypt("HE"));
-    
+    System.out.println(c.decrypt(c.encrypt("EL")));
+    //Odd string still don't work...
   }//end main
   
   

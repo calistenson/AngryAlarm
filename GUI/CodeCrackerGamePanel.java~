@@ -28,25 +28,28 @@ public class CodeCrackerGamePanel extends JPanel {
   
   // instance vars
   private CodeCracker game;
-  private Levels graph;
+  private ContentGraph graph;
   // for top
   private JLabel headerLabel;
   // for left panel
-  private JPanel leftPanel;
+  private ImagePanel leftPanel;
+  private JPanel labelPane, l1Pane, l2Pane, l3Pane, l4Pane;
   private JLabel levelsLabel;
   private JButton romeButton, tuscanyButton, veniceButton, quadButton, tupeloButton, hoopButton, tunnelsButton, clappButton;
   // for right panel
-  private JPanel rightPanel;
-  private JLabel instructLabel, imageLabel, submitLabel;
-  private JTextField submitText, storyText;
+  private JPanel rightPanel, instructPane, messagePane, imagePane, submitPane;
+  private JScrollPane storyPane;
+  private JLabel instructLabel, messageLabel;
+  private JTextField submitText;
+  private JTextArea storyText;
   private JButton submitButton;
   private BufferedImage detectiveImage;
   private JLabel detectiveLabel;
   // preferred sizes
-  private final int WIDTH = 850, HEIGHT = 750;
+  private final int WIDTH = 950, HEIGHT = 750;
   
   // constructor
-  public CodeCrackerGamePanel (CodeCracker c, Levels l) {
+  public CodeCrackerGamePanel (CodeCracker c, ContentGraph l) {
     
     game = c;
     graph = l;
@@ -58,27 +61,76 @@ public class CodeCrackerGamePanel extends JPanel {
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
     
     // starts with the top panel
-    headerLabel = new JLabel("<html><center>Welcome to Wendy Wellesley: Code Cracker!</center></html>");
-    headerLabel.setFont(new Font("Sans Serif", Font.PLAIN, 24));
-    headerLabel.setPreferredSize(new Dimension(850, 50));
+    headerLabel = new JLabel("Welcome to Wendy Wellesley: Code Cracker!");
+    headerLabel.setFont(new Font("Sans Serif", Font.PLAIN, 40));
     
     // creates left panel
     // nests Box Layout within panes of Flow Layout
-    leftPanel = new JPanel();
+    leftPanel = new ImagePanel(new ImageIcon("Images/map.png").getImage());
     leftPanel.setPreferredSize(new Dimension(423, 700));
     leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
     leftPanel.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 4));
     leftPanel.setBackground(new Color(76, 168, 194));
+    // creates panes
+    //labelPane = new JPanel();
+    //labelPane.setOpaque(false);
+    //labelPane.setSize(new Dimension(415, 40));
+    l1Pane = new JPanel();
+    l1Pane.setOpaque(false);
+    l2Pane = new JPanel();
+    l2Pane.setOpaque(false);
+    l3Pane = new JPanel();
+    l3Pane.setOpaque(false);
+    l4Pane = new JPanel();
+    l4Pane.setOpaque(false);
     // creates componenets for left panel
-    levelsLabel = new JLabel("Levels");
+    levelsLabel = new JLabel(" ");
+    levelsLabel.setPreferredSize(new Dimension(415, 60));
+    levelsLabel.setFont(new Font("Sans Serif", Font.PLAIN, 60));
+    levelsLabel.setForeground(new Color(76, 168, 194));
+    //System.out.println("LEVELS LABEL: " + levelsLabel.toString());
     romeButton = new JButton("Ancient Rome");
+    romeButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    romeButton.setPreferredSize(new Dimension(200, 100));
     tuscanyButton = new JButton("Tuscany");
+    tuscanyButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    tuscanyButton.setPreferredSize(new Dimension(150, 100));
     veniceButton = new JButton("Venice");
-    quadButton = new JButton("Academic Quad");
-    tupeloButton = new JButton("Tupelo Lane");
-    hoopButton = new JButton("Cafe Hoop");
-    tunnelsButton = new JButton("Wellesley Tunnels");
+    veniceButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    veniceButton.setPreferredSize(new Dimension(150, 100));
+    quadButton = new JButton("<html>The Quad</html>");
+    quadButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    quadButton.setPreferredSize(new Dimension(90, 100));
+    tupeloButton = new JButton("<html>Tupelo Lane</html>");
+    tupeloButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    tupeloButton.setPreferredSize(new Dimension(90, 100));
+    hoopButton = new JButton("<html>Cafe Hoop</html>");
+    hoopButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    hoopButton.setPreferredSize(new Dimension(90, 100));
+    tunnelsButton = new JButton("<html>The Tunnels</html>");
+    tunnelsButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    tunnelsButton.setPreferredSize(new Dimension(90, 100));
     clappButton = new JButton("Clapp Library");
+    clappButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
+    clappButton.setPreferredSize(new Dimension(200, 100));
+    
+    ArrayList<JButton> levelButtons = new ArrayList<JButton>();
+    levelButtons.add(romeButton);
+    levelButtons.add(tuscanyButton);
+    levelButtons.add(veniceButton);
+    levelButtons.add(quadButton);
+    levelButtons.add(tupeloButton);
+    levelButtons.add(hoopButton);
+    levelButtons.add(tunnelsButton);
+    levelButtons.add(clappButton);
+    
+    for (JButton j : levelButtons) {
+      j.setOpaque(false);
+      j.setContentAreaFilled(false);
+      j.setBorderPainted(false);
+      j.setText(" ");
+    }
+    
     // creates and adds listener to buttons
     CodeCrackerGamePanelListener listener = new CodeCrackerGamePanelListener();
     romeButton.addActionListener(listener);
@@ -89,76 +141,108 @@ public class CodeCrackerGamePanel extends JPanel {
     hoopButton.addActionListener(listener);
     tunnelsButton.addActionListener(listener);
     clappButton.addActionListener(listener);
-    // adds components to panel
+    // adds panes
+    //labelPane.add(levelsLabel);
+    l1Pane.add(romeButton);
+    l2Pane.add(tuscanyButton);
+    l2Pane.add(veniceButton);
+    l3Pane.add(quadButton);
+    l3Pane.add(tupeloButton);
+    l3Pane.add(hoopButton);
+    l3Pane.add(tunnelsButton);
+    l4Pane.add(clappButton);
+    // add all to right panel
     leftPanel.add(levelsLabel);
-    leftPanel.add(romeButton);
-    leftPanel.add(tuscanyButton);
-    leftPanel.add(veniceButton);
-    leftPanel.add(quadButton);
-    leftPanel.add(tupeloButton);
-    leftPanel.add(hoopButton);
-    leftPanel.add(tunnelsButton);
-    leftPanel.add(clappButton);
+    leftPanel.add(l1Pane);
+    leftPanel.add(l2Pane);
+    leftPanel.add(l3Pane);
+    leftPanel.add(l4Pane);
     
     // creates right panel
-    // nests Box Layout within panes of Flow Layout    
+    // nests Box Layout within panes of Flow Layout
+   
     rightPanel = new JPanel();
-    rightPanel.setPreferredSize(new Dimension(423, 700));
+    rightPanel.setPreferredSize(new Dimension(523, 700));
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
     rightPanel.setBorder(BorderFactory.createLineBorder(new Color(186, 186, 186), 4));
     rightPanel.setBackground(new Color(76, 168, 194));
     // creates componenets for right panel
-    instructLabel = new JLabel("Current level: " + game.getCurrentLevel().getName() + ". Read the storyline and click on the " 
-                                 + game.getCurrentLevel().getCipher().getType() + " button in the instructions pane " 
-                                 + "for more info on how to decrypt the cipher.");
-    storyText = new JTextField("story here", 40);
-    imageLabel = new JLabel("image here");
-    submitLabel = new JLabel("Submit the decoded message here when you are done.");
-    submitText = new JTextField(40);
-    submitButton = new JButton("Submit");
-    // adds listener to button
-    submitButton.addActionListener(listener);
-    // adds components to panel
-    rightPanel.add(instructLabel);
-    rightPanel.add(storyText);
-    rightPanel.add(imageLabel);
-    rightPanel.add(submitLabel);
-    rightPanel.add(submitText);
-    rightPanel.add(submitButton);
+    instructPane = new JPanel();
     
+    
+    instructLabel = new JLabel("<html><strong>Current level: " + game.getCurrentLevel().getName() + "</strong>. Read the storyline and click on the " 
+                                 + game.getCurrentLevel().getCipher().getType() + " button in the instructions pane " 
+                                 + "for more info on how to decrypt the cipher.</html>");
+    instructLabel.setPreferredSize(new Dimension(509, 50));
+    instructPane.add(instructLabel);
+    
+    storyText = new JTextArea(7, 42);
     try {
-      detectiveImage = ImageIO.read(new File("Images/woman.png"));
+      String content = new Scanner(graph.getRome().getStoryLine()).useDelimiter("\\A").next();
+      storyText.setText(content);
+      storyText.setLineWrap(true);
+    } catch (IOException e) {
+      System.out.println("***ALERT***  Could not find or read from file! Error: " + e);
+    }
+    storyPane = new JScrollPane(storyText);
+    storyText.setEditable(false);
+    storyText.setBackground(new Color(76, 168, 194));
+    storyPane.setBorder(BorderFactory.createEmptyBorder(0, 3, 3, 3));
+    
+    messagePane = new JPanel();
+    messageLabel = new JLabel("<html><strong>Encrypted message</strong>: " + graph.getRome().getCipher().encrypt(graph.getRome().getMessage()) + "</html>");
+    messagePane.add(messageLabel);
+    
+    imagePane = new JPanel();
+    try {
+      detectiveImage = ImageIO.read(new File("Images/submitwoman.png"));
       detectiveLabel = new JLabel(new ImageIcon(detectiveImage));
-      rightPanel.add(detectiveLabel);
+      imagePane.add(detectiveLabel);
     } catch (IOException e) {
       System.out.println("***ALERT***  Could not read or display image! Error: " + e);
     }
+      
+    submitPane = new JPanel();
+    submitText = new JTextField(40);
+    submitButton = new JButton("Submit");
+    submitButton.addActionListener(listener);
+    submitPane.add(submitText);
+    submitPane.add(submitButton);
+    
+    instructPane.setOpaque(false);
+    storyPane.setOpaque(false);
+    messagePane.setOpaque(false);
+    imagePane.setOpaque(false);
+    submitPane.setOpaque(false);
+    
+    //instructPane.setPreferredSize(new Dimension(509, 70));
+    storyPane.setSize(new Dimension(509, 150));
+    //messagePane.setPreferredSize(new Dimension(509, 20));
+        
+    rightPanel.add(instructPane);
+    rightPanel.add(storyPane);
+    rightPanel.add(messagePane);
+    rightPanel.add(imagePane);
+    rightPanel.add(submitPane);
     
     
     // adds everything to GUI
     this.add(headerLabel, BorderLayout.PAGE_START);
     this.add(leftPanel, BorderLayout.LINE_START);
     this.add(rightPanel, BorderLayout.CENTER);
-    
   }
-  /*
-   public void paintComponent (Graphics page) {
-   super.paintComponent(page);
-   detectiveIcon.paintIcon(this, page, 0, 418);
-   } */
+  
   
   private class CodeCrackerGamePanelListener implements ActionListener {
     
     public void actionPerformed(ActionEvent event) {
-      //leftPanel.repaint();
       JButton b = new JButton();
       b = (JButton)event.getSource();
       if (b == submitButton) {
         System.out.println("Wooh! You submitted!");
         if (game.playLevel(submitText.getText())) {
           nextLevel(game.current);
-          JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                        game.current.getName());
+          JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
         }
         else JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
       } else if (b == romeButton) {
@@ -169,8 +253,7 @@ public class CodeCrackerGamePanel extends JPanel {
           if (checkMessage(message, graph.getRome())) {
             if (game.chooseLevelFromPause(graph.getRome(), graph.getTuscany(), message)) {
               nextLevel(graph.getTuscany());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
@@ -179,8 +262,7 @@ public class CodeCrackerGamePanel extends JPanel {
           if (checkMessage(message, graph.getTuscany())) {
             if (game.chooseLevelFromPause(graph.getTuscany(), graph.getVenice(), message)) {
               nextLevel(graph.getVenice());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
@@ -189,8 +271,7 @@ public class CodeCrackerGamePanel extends JPanel {
           if (checkMessage(message, graph.getVenice())) {
             if (game.chooseLevelFromPause(graph.getVenice(), graph.getQuad(), message)) {
               nextLevel(graph.getQuad());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
@@ -199,8 +280,7 @@ public class CodeCrackerGamePanel extends JPanel {
           if (checkMessage(message, graph.getQuad())) {
             if (game.chooseLevelFromPause(graph.getQuad(), graph.getTupelo(), message)) {
               nextLevel(graph.getTupelo());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
@@ -209,8 +289,7 @@ public class CodeCrackerGamePanel extends JPanel {
           if (checkMessage(message, graph.getTupelo())) {
             if (game.chooseLevelFromPause(graph.getTupelo(), graph.getHoop(), message)) {
               nextLevel(graph.getHoop());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
@@ -219,8 +298,7 @@ public class CodeCrackerGamePanel extends JPanel {
           if (checkMessage(message, graph.getHoop())) {
             if (game.chooseLevelFromPause(graph.getHoop(), graph.getTunnels(), message)) {
               nextLevel(graph.getTunnels());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
@@ -229,25 +307,37 @@ public class CodeCrackerGamePanel extends JPanel {
           if (checkMessage(message, graph.getTunnels())) {
             if (game.chooseLevelFromPause(graph.getTunnels(), graph.getClapp(), message)) {
               nextLevel(graph.getClapp());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level: " +
-                                            game.current.getName());
+              JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
         } 
       }
-      
+      this.updateMap();
     }
     
     // checks message to make sure it's correct
     // returns true if so, false if not
     public boolean checkMessage(String message) {
-      return (message.equals(game.getCurrentLevel().getMessage()));
+      return (message.equalsIgnoreCase(game.getCurrentLevel().getMessage()));
     }
     
     public boolean checkMessage(String message, Level l) {
-      return (message.equals(l.getMessage()));
+      return (message.equalsIgnoreCase(l.getMessage()));
+    }
+    
+    public void updateMap() {
+      String s = game.getCurrentLevel().getName();
+      if (s.equals("Ancient Rome")) leftPanel.setImage("Images/mapRome.png");
+      else if (s.equals("Tuscany")) leftPanel.setImage("Images/mapTuscany.png");
+      else if (s.equals("Venice")) leftPanel.setImage("Images/mapVenice.png");
+      else if (s.equals("Academic Quad 1940")) leftPanel.setImage("Images/mapQuad.png");
+      else if (s.equals("Tupelo Lane May 1 1940")) leftPanel.setImage("Images/mapTupelo.png");
+      else if (s.equals("Cafè Hoop 1981")) leftPanel.setImage("Images/mapHoop.png");
+      else if (s.equals("Wellesley Tunnels 1990")) leftPanel.setImage("Images/mapTunnels.png");
+      else if (s.equals("Clapp Library")) leftPanel.setImage("Images/mapClapp.png");
+      else leftPanel.setImage("Images/map.png");
     }
     
     
@@ -255,7 +345,9 @@ public class CodeCrackerGamePanel extends JPanel {
     public void nextLevel(Level l) {
       System.out.println("Setting center (viewed as right) panel to next level's info.");
       try {
-        storyText.read(l.getStoryLine(), null);
+        String content = new Scanner (l.getStoryLine()).useDelimiter("\\A").next();
+        storyText.setText(content);
+        storyText.setBackground(new Color(76, 168, 194));
       } catch (IOException e) {
         System.out.print("***ATTENTION***: COULD NOT READ NEXT LEVEL'S STORY LINE FROM FILE. \n ERROR: " + e);
       }
