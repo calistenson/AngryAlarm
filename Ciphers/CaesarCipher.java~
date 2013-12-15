@@ -64,7 +64,11 @@ public class CaesarCipher extends Cipher{
     for(int i=0; i<words.length; i++){
       String word = words[i];
       char[] messageLet = word.toCharArray();
+<<<<<<< HEAD
       for(int j=0; j<messageLet.length; j++){
+=======
+      for(int j=0; j<message.length(); j++){
+>>>>>>> 6346613b27747a112313b65dfbf8c6639e08e815
         newIndex = messageLet[j] + shiftVal;
         newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
         encrypted += (char) newIndex;
