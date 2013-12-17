@@ -170,8 +170,8 @@ public class CodeCrackerGamePanel extends JPanel {
     instructPane = new JPanel();
     
     
-    instructLabel = new JLabel("<html><strong>Current level: " + game.getCurrentLevel().getName() + "</strong>. Read the storyline and click on the " 
-                                 + game.getCurrentLevel().getCipher().getType() + " button in the instructions pane " 
+    instructLabel = new JLabel("<html><strong>Current level: " + game.getCurrent().getName() + "</strong>. Read the storyline and click on the " 
+                                 + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
                                  + "for more info on how to decrypt the cipher.</html>");
     instructLabel.setPreferredSize(new Dimension(509, 50));
     instructPane.add(instructLabel);
@@ -241,7 +241,7 @@ public class CodeCrackerGamePanel extends JPanel {
       if (b == submitButton) {
         System.out.println("Wooh! You submitted!");
         if (game.playLevel(submitText.getText())) {
-          nextLevel(game.current);
+          nextLevel(game.getCurrent());
           JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
         }
         else JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
@@ -250,65 +250,53 @@ public class CodeCrackerGamePanel extends JPanel {
       } else {
         String message = (String)JOptionPane.showInputDialog("Please input the decrypted message from the previous level");
         if (b == tuscanyButton) {
-          if (checkMessage(message, graph.getRome())) {
-            if (game.chooseLevelFromPause(graph.getRome(), graph.getTuscany(), message)) {
+          if (game.chooseNewLevel(graph.getTuscany())) {
               nextLevel(graph.getTuscany());
               JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
             }
-          } else {
+           else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           }
         } else if (b == veniceButton) {
-          if (checkMessage(message, graph.getTuscany())) {
-            if (game.chooseLevelFromPause(graph.getTuscany(), graph.getVenice(), message)) {
+          if (game.chooseNewLevel(graph.getVenice())) {
               nextLevel(graph.getVenice());
               JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
-            }
+            
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           }
         } else if (b == quadButton) {
-          if (checkMessage(message, graph.getVenice())) {
-            if (game.chooseLevelFromPause(graph.getVenice(), graph.getQuad(), message)) {
+          if (game.chooseNewLevel(graph.getQuad())) {
               nextLevel(graph.getQuad());
               JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
-            }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
         } else if (b == tupeloButton) {
-          if (checkMessage(message, graph.getQuad())) {
-            if (game.chooseLevelFromPause(graph.getQuad(), graph.getTupelo(), message)) {
+          if (game.chooseNewLevel(graph.getTupelo())) {
               nextLevel(graph.getTupelo());
               JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
-            }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
         } else if (b == hoopButton) {
-          if (checkMessage(message, graph.getTupelo())) {
-            if (game.chooseLevelFromPause(graph.getTupelo(), graph.getHoop(), message)) {
+          if (game.chooseNewLevel(graph.getHoop())) {
               nextLevel(graph.getHoop());
               JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
-            }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
         } else if (b == tunnelsButton) {
-          if (checkMessage(message, graph.getHoop())) {
-            if (game.chooseLevelFromPause(graph.getHoop(), graph.getTunnels(), message)) {
+          if (game.chooseNewLevel(graph.getTunnels())) {
               nextLevel(graph.getTunnels());
               JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
-            }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           }  
         } else if (b == clappButton) {
-          if (checkMessage(message, graph.getTunnels())) {
-            if (game.chooseLevelFromPause(graph.getTunnels(), graph.getClapp(), message)) {
+          if (game.chooseNewLevel(graph.getClapp())) {
               nextLevel(graph.getClapp());
               JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
-            }
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
@@ -317,18 +305,9 @@ public class CodeCrackerGamePanel extends JPanel {
       this.updateMap();
     }
     
-    // checks message to make sure it's correct
-    // returns true if so, false if not
-    public boolean checkMessage(String message) {
-      return (message.equalsIgnoreCase(game.getCurrentLevel().getMessage()));
-    }
-    
-    public boolean checkMessage(String message, Level l) {
-      return (message.equalsIgnoreCase(l.getMessage()));
-    }
     
     public void updateMap() {
-      String s = game.getCurrentLevel().getName();
+      String s = game.getCurrent().getName();
       if (s.equals("Ancient Rome")) leftPanel.setImage("Images/mapRome.png");
       else if (s.equals("Tuscany")) leftPanel.setImage("Images/mapTuscany.png");
       else if (s.equals("Venice")) leftPanel.setImage("Images/mapVenice.png");
@@ -348,6 +327,10 @@ public class CodeCrackerGamePanel extends JPanel {
         String content = new Scanner (l.getStoryLine()).useDelimiter("\\A").next();
         storyText.setText(content);
         storyText.setBackground(new Color(76, 168, 194));
+        instructLabel.setText("<html><strong>Current level: " + game.getCurrent().getName() + "</strong>. Read the storyline and click on the " 
+                                 + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
+                                 + "for more info on how to decrypt the cipher.</html>");
+        messageLabel.setText("<html><strong>Encrypted message</strong>: " + game.getCurrent().getCipher().encrypt(game.getCurrent().getMessage()) + "</html>");
       } catch (IOException e) {
         System.out.print("***ATTENTION***: COULD NOT READ NEXT LEVEL'S STORY LINE FROM FILE. \n ERROR: " + e);
       }
