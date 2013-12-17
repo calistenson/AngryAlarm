@@ -154,6 +154,9 @@ public class AffineCipher extends Cipher {
     System.out.println(c.decrypt(c.encrypt("SUPERCALIFRAGILISTICEXPIALADOCIOUS")));
     System.out.println(c.encrypt("The pirates attacked our ship we need reinforcements"));
     
+    AffineCipher test = new AffineCipher(11, 19, 18);
+    System.out.println(test.decrypt("IEXXKFZKX"));
+    
     //needs more testing
   }//end main
   
