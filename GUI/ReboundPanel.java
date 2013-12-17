@@ -63,7 +63,7 @@ public class ReboundPanel extends JPanel {
       
       if (event.getSource() == xButton) {
         JOptionPane.showMessageDialog(null, "<html><strong>Clara Smith</strong>, Wellesley College '17"
-                                        + "<br>Computer Science, Media Arts and Sciences<br>csmith6@wellesley.edu"
+                                        + "<br>Computer Science, Cinema and Media Studies<br>csmith6@wellesley.edu"
                                         + "<br><br><strong>Cali Stenson</strong>, Wellesley College '17"
                                         + "<br>Computer Science, Mathematics<br>cstenson@wellesley.edu</html>");
       }
