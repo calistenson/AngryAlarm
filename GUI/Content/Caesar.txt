@@ -1,1 +1,1 @@
-Herein lie the instructions for decrypting a caesar cipher.
+One good way to think about Caesar Ciphers is that they are often also called “Shift Ciphers” -- as you may be able to deduce, the Caesar Cipher consists of shifting each letter of the alphabet by a set number to create a new “alphabet” with which the decrypted message is written. For example, in a Caesar cipher of shift 3, A would become D, B would become E, Y would become B and so on. In this game, we have shifted the alphabet forward by 3 characters. See if you can decrypt the message!
