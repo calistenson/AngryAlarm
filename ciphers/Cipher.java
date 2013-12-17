@@ -15,10 +15,26 @@
 package ciphers;
 
 public abstract class Cipher{
-   
   
+  /**
+   * abstract encrypt()
+   * @param message String
+   * @return String
+   */ 
   public abstract String encrypt(String message);
   
+  /**
+   * abstract decrypt()
+   * @param message String
+   * @return String
+   */ 
   public abstract String decrypt(String message);
+
+  /**
+   * abstract getType()
+   * @return String  
+   * returns string value of type of cipher.
+   */
+  public abstract String getType();
   
 }

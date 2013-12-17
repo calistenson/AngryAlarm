@@ -19,10 +19,10 @@ import ciphers.HillCipher;
 
 public class CodeCracker {
   
-  AdjMatGraphPlus<Level> levels;
-  HashMap<String,String> codes = new HashMap();
-  Level current;
-  boolean levelAccomplished;
+  private AdjMatGraphPlus<Level> levels;
+  private HashMap<String,String> codes = new HashMap();
+  private Level current;
+  private boolean levelAccomplished;
   
   public CodeCracker(AdjMatGraphPlus<Level> gameGraph) { 
     levels = gameGraph;
@@ -43,7 +43,7 @@ public class CodeCracker {
   }
   
   public boolean playLevel(String decoded){
-    if(current.getMessage().equals(decoded)){
+    if(current.getMessage().equalsIgnoreCase(decoded)){
       levelAccomplished = true;
       System.out.println("Level " + current.getName() + " completed!");
       return true;
@@ -54,25 +54,20 @@ public class CodeCracker {
     }
   }  
   
-  public void chooseNewLevel(Level l){
+  public boolean chooseNewLevel(Level l){
     if(levels.isArc(current, l) && levelAccomplished){
       current = l;
       levelAccomplished = false;
+      return true;
     }else if(!levelAccomplished){
       System.out.println("Please complete current level");
+      return false;
     }else{
       System.out.println("Please choose appropriate level");
+      return false;
     }
   }
   
-  public boolean chooseLevelFromPause(Level last, Level next, String s){
-    if (last.getMessage().equals(s)) {
-      current = next;
-      levelAccomplished = false;
-      return true;
-    }
-    return false;
-  }
   
   public String codedMessage(Level l){
     String message = l.getMessage();
@@ -80,9 +75,10 @@ public class CodeCracker {
     return coded;
   }  
   
-  public Level getCurrentLevel() {
+  public Level getCurrent() {
     return current;
   }
+  
   
   
   

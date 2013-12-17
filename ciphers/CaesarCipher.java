@@ -64,11 +64,7 @@ public class CaesarCipher extends Cipher{
     for(int i=0; i<words.length; i++){
       String word = words[i];
       char[] messageLet = word.toCharArray();
-<<<<<<< HEAD
       for(int j=0; j<messageLet.length; j++){
-=======
-      for(int j=0; j<message.length(); j++){
->>>>>>> 6346613b27747a112313b65dfbf8c6639e08e815
         newIndex = messageLet[j] + shiftVal;
         newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
         encrypted += (char) newIndex;
@@ -100,7 +96,12 @@ public class CaesarCipher extends Cipher{
     }
     return decrypted;
   }
-  
+ 
+  /**
+   * getType()
+   * @return String  
+   * returns string value of type of cipher.
+   */
   public String getType() {
     return "Caesar Cipher";
   }
@@ -120,9 +121,9 @@ public class CaesarCipher extends Cipher{
     System.out.println("Decrypt COIN using Caesar with shift value of 3: ");
     System.out.println(c.decrypt(c.encrypt("COIN")));
     c.setVal(26);
-    System.out.println("Encrypt CALI using Caesar with shift value of 26: ");
+    System.out.println("Encrypt CALI Stenson using Caesar with shift value of 26: ");
     System.out.println(c.encrypt("CALI"));
-    System.out.println("Decrypt CALI using Caesar with shift value of 26: ");
+    System.out.println("Decrypt CALI Stenson using Caesar with shift value of 26: ");
     System.out.println(c.decrypt("CALI Stenson"));
     
   }//end main  

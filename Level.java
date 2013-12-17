@@ -114,8 +114,8 @@ public class Level {
   }
   
   /**
-   * Class does not include a main method because the level class is similar to
-   * a node and does not have any complicated methods.
+   * Class does not include a main method because the level class is 
+   * tested in the CodeCracker class.
    */ 
   
 }

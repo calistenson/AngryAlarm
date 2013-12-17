@@ -19,20 +19,41 @@ import ciphers.HillCipher;
 
 public class CodeCracker {
   
+  /**
+   * Instance Variables
+   * levels AdjMatGraphPlus<level>
+   * codes HashMap<String, String> 
+   * current Level
+   * levelAccomplished boolean
+   */ 
   private AdjMatGraphPlus<Level> levels;
   private HashMap<String,String> codes = new HashMap();
   private Level current;
   private boolean levelAccomplished;
   
+  /**
+   * Constructor
+   * @param gameGraph AdjMatGraphPlus<Level>
+   * 
+   */ 
   public CodeCracker(AdjMatGraphPlus<Level> gameGraph) { 
     levels = gameGraph;
     current = levels.allSources().get(0);//with game graph the must be only one source to start with
-    constructMap();
-    levelAccomplished = false;
+    codes =  constructMap();//creates an easily accessible list of of messages and their encrypted values
+    levelAccomplished = false;//None of the levels have been played when the game is constructed 
   }
   
+  /**
+   * constructMap()
+   * method used to create a HashMap of the 
+   * messages corresponding to their encrypted 
+   * text. Convenient for lookup because it's
+   * faster than encrypting every message in
+   * the graph as needed. This way encryption
+   * only happens once.
+   */ 
   private HashMap constructMap(){
-    LinkedList<Level> listLevs = levels.DFS(current);
+    LinkedList<Level> listLevs = levels.BFS(current);
     for(int i=0; i<listLevs.size(); i++){
       Level curr = listLevs.get(i);
       String message = curr.getMessage();
@@ -42,6 +63,15 @@ public class CodeCracker {
     return codes;
   }
   
+  /**
+   * playLevel()
+   * @param decoded String
+   * @return boolean
+   * Checks to see if the string passed in matches
+   * the message associated with the current level
+   * returns true if the user plays correctly and
+   * false otherwise. 
+   */ 
   public boolean playLevel(String decoded){
     if(current.getMessage().equalsIgnoreCase(decoded)){
       levelAccomplished = true;
@@ -54,6 +84,16 @@ public class CodeCracker {
     }
   }  
   
+  /**
+   * chooseNewLevel()
+   * @param l Level
+   * @return boolean
+   * Attempts to choose new level for the game.
+   * Fails to choose a new level if the user picks one 
+   * that doesn't connect to the current level or if the
+   * user tries to move on without accomplishing the 
+   * current level. 
+   */ 
   public boolean chooseNewLevel(Level l){
     if(levels.isArc(current, l) && levelAccomplished){
       current = l;
@@ -68,22 +108,33 @@ public class CodeCracker {
     }
   }
   
-  
+  /**
+   * codedMessage()
+   * @param Level l
+   * @return String
+   * retrieves encrypted message from the codes HashMap.
+   */ 
   public String codedMessage(Level l){
     String message = l.getMessage();
     String coded = codes.get(message);
     return coded;
   }  
   
+  /**
+   * getCurrent()
+   * @return Level
+   * Returns the current level the user is playing
+   */ 
   public Level getCurrent() {
     return current;
   }
   
-  
-  
-  
+  /**
+   * main()
+   * for testing
+   */ 
   public static void main(String[] args) { 
-    //(Cipher c, String storyFile, String name, String mess)
+    //creates the levels
     Level rome = new Level(new CaesarCipher(3), "Content/Ancient_Rome.txt", "Ancient Rome", "Beware of the Ides of March");
     
     VigenereCipher vc = new VigenereCipher("Wendy");
@@ -93,9 +144,10 @@ public class CodeCracker {
     AffineCipher ac = new AffineCipher(9, 3, 3);
     Level quad = new Level(ac, "Content/Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower! First person to the top gets ice cream!");
     Level tupelo = new Level(ac, "Content/Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
-    Level hoop = new Level(ac, "Content/Caf_Hoop_1981.txt", "Caf Hoop 1981", "Make Nachos.");
+    Level hoop = new Level(ac, "Content/Caf?_Hoop_1981.txt", "Caf? Hoop 1981", "Make Nachos.");
     Level tunnels = new Level(ac, "Content/Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos!");
     
+    //matrices for HillCipher
     double[][] k = new double[2][2];
     k[0][0] = 9;
     k[0][1] = 6;
@@ -113,6 +165,7 @@ public class CodeCracker {
     HillCipher hc = new HillCipher(key, shiftVal, keyInv);
     Level clapp = new Level(hc, "Content/Clapp_Library.txt", "Clapp Library", "HI");
     
+    //creates graph of levels
     AdjMatGraphPlus<Level> gameGraph = new AdjMatGraphPlus<Level>();
     gameGraph.addVertex(rome);
     gameGraph.addVertex(tuscany);
@@ -134,6 +187,7 @@ public class CodeCracker {
     gameGraph.addArc(hoop, clapp);
     gameGraph.addArc(tunnels, clapp);
     
+    //creates the game.
     CodeCracker game = new CodeCracker(gameGraph);
     game.playLevel("Beware of the Ides of March");
     game.chooseNewLevel(tuscany);
@@ -141,12 +195,7 @@ public class CodeCracker {
     game.chooseNewLevel(quad);
     game.playLevel("Storm the tower! First person to the top gets ice cream!");
     game.playLevel("ladsfjsaldfjsdjf");
-    
-    
-    
-    
-  }
-  
-  /* ADD YOUR CODE HERE */
+  }//end main
+
   
 }
