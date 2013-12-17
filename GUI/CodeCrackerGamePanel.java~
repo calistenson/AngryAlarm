@@ -330,7 +330,7 @@ public class CodeCrackerGamePanel extends JPanel {
         instructLabel.setText("<html><strong>Current level: " + game.getCurrent().getName() + "</strong>. Read the storyline and click on the " 
                                  + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
                                  + "for more info on how to decrypt the cipher.</html>");
-        messageLabel.setText("<html><strong>Encrypted message</strong>: " + game.getCurrent().getCipher().encrypt(game.getCurrent().getMessage()) + "</html>");
+        messageLabel.setText("<html><strong>Encrypted message</strong>: " + game.codedMessage(game.getCurrent()) + "</html>");
       } catch (IOException e) {
         System.out.print("***ATTENTION***: COULD NOT READ NEXT LEVEL'S STORY LINE FROM FILE. \n ERROR: " + e);
       }

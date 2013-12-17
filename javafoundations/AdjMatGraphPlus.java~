@@ -6,7 +6,7 @@
   * It handles unweighted graphs only, but it can be extended.
   * It does not handle operations involving non-existing vertices
   ********************************************************************/
-import javafoundations.*;
+package javafoundations;
 import java.util.*;
 import java.io.*;
 

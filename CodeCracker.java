@@ -39,7 +39,7 @@ public class CodeCracker {
   public CodeCracker(AdjMatGraphPlus<Level> gameGraph) { 
     levels = gameGraph;
     current = levels.allSources().get(0);//with game graph the must be only one source to start with
-    constructMap();//creates an easily accessible list of of messages and their encrypted values
+    codes =  constructMap();//creates an easily accessible list of of messages and their encrypted values
     levelAccomplished = false;//None of the levels have been played when the game is constructed 
   }
   
@@ -52,14 +52,15 @@ public class CodeCracker {
    * the graph as needed. This way encryption
    * only happens once.
    */ 
-  private void constructMap(){
-    LinkedList<Level> listLevs = levels.DFS(current);
+  private HashMap constructMap(){
+    LinkedList<Level> listLevs = levels.BFS(current);
     for(int i=0; i<listLevs.size(); i++){
       Level curr = listLevs.get(i);
       String message = curr.getMessage();
       String encrypted = curr.getCipher().encrypt(curr.getMessage());
       codes.put(message, encrypted);
     }
+    return codes;
   }
   
   /**

@@ -552,27 +552,39 @@ public class AdjMatGraphPlus<T> implements GraphPlus<T>
     * it returns an empty list
     * @return a linked list with the vertices in breadth-first order
     *****************************************************************/
-  public LinkedList<T> BFS(T vertex)
+   public LinkedList<T> BFS(T vertex)
   {
-    T current;
-    ArrayQueue<T> qu = new ArrayQueue<T>();
-    AdjMatGraphPlus<T> graph = clone();//clone graph preserves properties of graph
-    LinkedList<T> sorted = new LinkedList<T>();
-    qu.enqueue(vertex);
-    while(!qu.isEmpty()){
-      current = qu.dequeue();
-      LinkedList<T> neighbors = graph.getSuccessors(current);
-      for(int i=0; i < neighbors.size(); i++){
-        if(!sorted.contains(neighbors.get(i))){
-          qu.enqueue(neighbors.get(i));//adds the neighbors that haven't been traversed to the queue.
-        }  
-      }
-      if(!sorted.contains(current)){
-        sorted.add(current);  //adds traversed vertex
-      }
-    }  
-    return sorted;
     
+    int currentVertex;
+    LinkedQueue<T> traversalQueue = new LinkedQueue<T>();
+    LinkedList<T> resultList = new LinkedList<T>();
+    int startIndex = this.getIndex(vertex);
+    
+    if (startIndex == -1)
+      return resultList;
+    
+    boolean[] visited = new boolean[this.n];
+    for (int x = 0; x < this.n; x++)
+      visited[x] = false;
+    System.out.println("Setting visited to false at all nodes...");
+    
+    traversalQueue.enqueue(this.getVertex(startIndex));
+    visited[startIndex] = true;
+    
+    while (!traversalQueue.isEmpty()) { 
+      currentVertex = this.getIndex(traversalQueue.dequeue());
+      resultList.add(vertices[currentVertex]);
+      for (int i = 0; i < this.n; i++) {
+        if (this.arcs[currentVertex][i] && !visited[i]) { 
+          System.out.println("Enqueuing vertex...");
+          traversalQueue.enqueue(this.getVertex(i)); 
+          visited[i] = true;
+          
+        } 
+      }
+    }
+    
+    return resultList;
   }
   
   /******************************************************************
