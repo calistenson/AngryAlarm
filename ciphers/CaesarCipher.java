@@ -125,6 +125,7 @@ public class CaesarCipher extends Cipher{
     System.out.println(c.encrypt("CALI"));
     System.out.println("Decrypt CALI Stenson using Caesar with shift value of 26: ");
     System.out.println(c.decrypt("CALI Stenson"));
+    System.out.println(c.encrypt(c.decrypt("Beware of the ides of March")));
     
   }//end main  
 }

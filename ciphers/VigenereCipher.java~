@@ -69,10 +69,10 @@ public class VigenereCipher extends Cipher{
     String encrypted = "";
     message = message.toUpperCase();
     String[] words = message.split(" ");
-    for(int i=0; i<words.length; i++){
+    for(int i=0; i<words.length; i++){//goes through each word separately to preserve spaces.
       String word = words[i];
       char[] messageLet = word.toCharArray();
-      for(int j=0; j<messageLet.length; j++){
+      for(int j=0; j<messageLet.length; j++){//encrypts one character at a time.
         shiftVal = (int) keyword.charAt(p) - 'A';
         newIndex = messageLet[j] + shiftVal;
         newIndex = ((newIndex > 'Z') ? 'A'+(newIndex - 'Z')-1: newIndex);
@@ -111,6 +111,11 @@ public class VigenereCipher extends Cipher{
     return decrypted;
   }
   
+  /**
+   * getType()
+   * @return String  
+   * returns string value of type of cipher.
+   */
   public String getType() {
     return "Vigenere Cipher";
   }
@@ -122,7 +127,6 @@ public class VigenereCipher extends Cipher{
   public static void main(String[] args){
     VigenereCipher deflt = new VigenereCipher(); //tests the default construtor of class
     System.out.println("Encoded then decode CALI: " + deflt.encrypt(deflt.decrypt("CALI")));
-    
     VigenereCipher otherConstruct = new VigenereCipher("LEMON");//tests the other constructor of the class
     System.out.println("Encrypt ATTACK AT DAWN using Vigenere with LEMON as a keyword (should result in LXFOPV EF RNHR):");
     System.out.println(otherConstruct.encrypt("ATTACK AT DAWN"));

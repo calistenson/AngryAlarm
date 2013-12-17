@@ -334,8 +334,11 @@ public class CodeCrackerGamePanel extends JPanel {
                                  + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
                                  + "for more info on how to decrypt the cipher.</html>");
         messageLabel.setText("<html><strong>Encrypted message</strong>: " + game.codedMessage(game.getCurrent()) + "</html>");
+<<<<<<< HEAD
         //graph.getRome().getCipher().encrypt(graph.getRome().getMessage())
         System.out.println("Current level: " + game.getCurrent() + "\n" + "Encrypted message: " + game.codedMessage(game.getCurrent()));
+=======
+>>>>>>> 39339f7512ab93405a331bc89f33cfc41013acfc
       } catch (IOException e) {
         System.out.print("***ATTENTION***: COULD NOT READ NEXT LEVEL'S STORY LINE FROM FILE. \n ERROR: " + e);
       }

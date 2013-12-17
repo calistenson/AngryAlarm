@@ -15,6 +15,10 @@
 package ciphers;
 
 public abstract class Cipher{
+<<<<<<< HEAD:ciphers/Cipher.java
+=======
+  
+>>>>>>> 39339f7512ab93405a331bc89f33cfc41013acfc:Ciphers/Cipher.java~
   
   /**
    * abstract encrypt()
@@ -35,6 +39,8 @@ public abstract class Cipher{
    * @return String  
    * returns string value of type of cipher.
    */
+  public abstract String getType();
+  
   public abstract String getType();
   
 }
