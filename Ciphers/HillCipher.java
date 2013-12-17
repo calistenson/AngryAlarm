@@ -68,6 +68,7 @@ public class HillCipher extends Cipher{
   public Matrix getShift(){
     return shiftVal;
   }
+  
   /**
    * setter method 
    * @param s Matrix
@@ -123,12 +124,12 @@ public class HillCipher extends Cipher{
          encrypted += (char) newIndex;
        }
      }else{//length of message is odd and first letter is encoded separately.
+       //bug in this section; first character in odd string encrypts incorrectly.
        double[] charval = {(double)charVals[0], (double)charVals[1]};
        Matrix letters = new Matrix(charval, 2);
        Matrix encrptd = (key.times(letters)).plus(shiftVal);
        newIndex = 'A' + (int)(encrptd.get(0,0) % 26);
        encrypted += (char) newIndex;
-       System.out.println(message + " odd letter " + (char)newIndex); 
        for(int k=1; k<charVals.length-1; k+=2){
          charval[0] = (double)charVals[k];
          charval[1] = charVals[k+1];
@@ -175,13 +176,13 @@ public class HillCipher extends Cipher{
           newIndex = 'A' + (int)(decrptd.get(1,0) % 26);
           decrypted += (char) newIndex;
         }
-      }else{
+      }else{//length of message is odd and first letter is encoded separately.  
+        //bug in this section. First letters in odd strings decrypt incorrectly.
         double[] charval = {(double)charVals[0], (double)charVals[1]};
         Matrix letters = new Matrix(charval, 2);
         Matrix decrptd = (keyInverse.times(letters.minus(shiftVal)));
         newIndex = 'A' + (int)(decrptd.get(0,0) % 26);
         decrypted += (char) newIndex;
-        System.out.println(message + " odd letter " + (char)newIndex); 
         for(int k=1; k<charVals.length-1; k+=2){
           charval[0] = (double)charVals[k];
           charval[1] = (double) charVals[k+1];
@@ -199,6 +200,11 @@ public class HillCipher extends Cipher{
     
   }
   
+  /**
+   * getType()
+   * @return String  
+   * returns string value of type of cipher.
+   */ 
   public String getType() {
     return "Hill Cipher";
   }
@@ -208,7 +214,6 @@ public class HillCipher extends Cipher{
    * for testing
    */
   public static void main(String[] args) {
-    
     
     double[][] k = new double[2][2];
     k[0][0] = 9;
@@ -225,11 +230,12 @@ public class HillCipher extends Cipher{
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
     HillCipher c = new HillCipher(key, shiftVal, keyInv);
-    System.out.println(c.decrypt(c.encrypt("HI CALI ANd CLARA")));
-    System.out.println(c.decrypt("HE SMRC"));
-    System.out.println(c.decrypt("HE"));
-    System.out.println(c.decrypt(c.encrypt("EL")));
-    //Odd string still don't work...
+    System.out.println("Encrypt then decrypt 'Hi Cali and Clara' should remain the same: " + c.decrypt(c.encrypt("Hi Cali And Clara")));
+    System.out.println("Decrypt 'he smrc' should result in HI CALI: " + c.decrypt("HE SMRC"));
+    System.out.println("Decrypt he should be hi: "  + c.decrypt("HE"));
+    
+    //Odd strings don't work
+    
   }//end main
   
   

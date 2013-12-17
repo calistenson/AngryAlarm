@@ -138,6 +138,11 @@ public class AffineCipher extends Cipher {
     return decrypted;
   }
   
+  /**
+   * getType()
+   * @return String  
+   * returns string value of type of cipher.
+   */
   public String getType() {
     return "Affine Cipher";
   }

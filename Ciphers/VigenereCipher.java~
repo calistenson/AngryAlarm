@@ -33,7 +33,7 @@ public class VigenereCipher extends Cipher{
    * when they create the VigenereCipher object.
    */ 
   public VigenereCipher(String key){
-    keyword = key;
+    keyword = key.toUpperCase();
   }
   
   /**
@@ -112,7 +112,7 @@ public class VigenereCipher extends Cipher{
   }
   
   public String getType() {
-    return "Caesar Cipher";
+    return "Vigenere Cipher";
   }
   
   /**
