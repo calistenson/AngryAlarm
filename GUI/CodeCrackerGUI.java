@@ -26,14 +26,14 @@ public class CodeCrackerGUI {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     // creates an instance of CodeCracker and Levels
-    ContentGraph graph = new ContentGraph();
-    CodeCracker game = new CodeCracker(graph.getGameGraph());
+    ContentGraph content = new ContentGraph();
+    CodeCracker game = new CodeCracker(content.getGameGraph());
     
     
     // creates panels
     CodeCrackerAboutPanel aboutPanel = new CodeCrackerAboutPanel();
     CodeCrackerInstructionsPanel instructionsPanel = new CodeCrackerInstructionsPanel();
-    CodeCrackerGamePanel gamePanel = new CodeCrackerGamePanel(game, graph);
+    CodeCrackerGamePanel gamePanel = new CodeCrackerGamePanel(game, content);
     
     // creates tabbed pane
     // adds tabbed panels to frame

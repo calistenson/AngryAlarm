@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 public class CodeCrackerInstructionsPanel extends JPanel {
   
   // instance vars
-  private JButton caesarButton, vigButton, affineButton, hillButton;
+  private JButton caesarButton, vigButton, affineButton, hillButton, otherButton;
   private ImagePanel instructionsPanel;
   
   // preferred sizes
@@ -37,11 +37,10 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     this.setBackground(Color.BLACK); // sets background color
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
     instructionsPanel = new ImagePanel(new ImageIcon("Images/Instructions.png").getImage());
-    instructionsPanel.setLayout(new GridLayout(2, 2));
+    instructionsPanel.setLayout(new GridLayout(3, 4));
     instructionsPanel.setOpaque(false);
     
     // create and stylize new componenets
-    
     
     caesarButton = new JButton("");
     caesarButton.setOpaque(false);
@@ -70,10 +69,18 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     hillButton.addActionListener(listener);
     
     // add everything to frame
+    
+    for (int x = 0; x < 8; x ++) {
+      otherButton = new JButton("");
+      otherButton.setOpaque(false);
+      otherButton.setContentAreaFilled(false);
+      otherButton.setBorderPainted(false);
+      instructionsPanel.add(otherButton);
+    }
     instructionsPanel.add(caesarButton);
     instructionsPanel.add(vigButton);
-    instructionsPanel.add(hillButton);
     instructionsPanel.add(affineButton);
+    instructionsPanel.add(hillButton);
     this.add(instructionsPanel, BorderLayout.LINE_START);
     
   }
@@ -94,8 +101,8 @@ public class CodeCrackerInstructionsPanel extends JPanel {
           instructions = new File("Content/Hill.txt");
         }
         try {
-        String content = new Scanner(instructions).useDelimiter("\\A").next();
-        JOptionPane.showMessageDialog(null, content);
+          String content = new Scanner(instructions).useDelimiter("\\A").next();
+          JOptionPane.showMessageDialog(null, content);
         } catch (IOException e) {
           System.out.println("**ERROR**: " + e);
         }

@@ -1,1 +1,9 @@
-The Affine Cipher is a type of cipher in which each letter in an alphabet is matched with its numeric equivalent, encrypted using a mathematical function, and then converted back to a letter. For example, in order to decrypt our Affine Cipher, you must take the letter, find it’s numeric equivalent, and place it in the function:
+<html>The Affine Cipher is a type of cipher in
+which each letter in an alphabet is mat-
+ched with its numeric equivalent, encry-
+pted using a mathematical function, and
+then converted back to a letter. For ex-
+ample, in order to decrypt our Affine C-
+ipher , you must take the letter, find
+it's numeric equivalent, and place it in
+the function:
