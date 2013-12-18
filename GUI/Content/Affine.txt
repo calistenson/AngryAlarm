@@ -1,9 +1,17 @@
-<html>The Affine Cipher is a type of cipher in
-which each letter in an alphabet is mat-
-ched with its numeric equivalent, encry-
-pted using a mathematical function, and
-then converted back to a letter. For ex-
-ample, in order to decrypt our Affine C-
-ipher , you must take the letter, find
-it's numeric equivalent, and place it in
-the function:
+<html>The Affine Cipher is a type of cipher
+in which each letter in an alphabet is matched
+with its numeric equivalent, encrypted using
+the function C = kP + s (mod 26) where k,s 
+are integers and P is the value associated 
+with the letter from the message. Deciphering 
+the text requires the function P = q(C-s) (mod 26) 
+where C is the value of the encrypted letter, 
+q is k's inverse mod 26, and s is the same shift 
+value as before. For the Affine Cipher in our 
+code cracker C = 9*P + 3 (mod 26) and P = 3*(C-3) (mod 26). 
+In other words, decrypt the Affine cipher by shifting 
+your character back three letters in the alphabet, 
+multiplying that characters value by three, and 
+then subtract 26 until you have a value between 
+0 and 25 (if your number after multiplying is 
+between 0 and 25 then don't subtract anything).

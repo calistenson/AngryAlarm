@@ -39,22 +39,17 @@ public class CodeCrackerAboutPanel extends JPanel {
     // sets up visuals
     //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // sets layout to Box Layout
     setLayout(new BorderLayout());
+    
     // whateverlabel.setFont(new Font("Serif", Font.PLAIN, 18)); // sets the font
     this.setBackground(new Color(76, 168, 194)); // sets background color
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // sets the size of the panel
+    
     aboutPanel = new ImagePanel(new ImageIcon("Images/About.png").getImage());
     aboutPanel.setLayout(new BoxLayout(aboutPanel, BoxLayout.Y_AXIS));
-    sigsPanel = new ReboundPanel();
+    
+    sigsPanel = new ReboundPanel(); //see ReboundPanel class for more info on what rebound panel does
     sigsPanel.setPreferredSize(new Dimension(WIDTH, 150));
-    sigsPanel.setOpaque(false);
-    /*try {
-      sigsImage = ImageIO.read(new File("Images/sigs.png"));
-      sigsLabel = new JLabel(new ImageIcon(sigsImage));
-      aboutPanel.add(sigsLabel);
-      System.out.println("*SIGS ADDED YALL*");
-    } catch (IOException e) {
-      System.out.println("***ALERT***  Could not read or display image! Error: " + e);
-    }*/
+    sigsPanel.setOpaque(false); //sets it so image is see-through in parts
     
     this.add(aboutPanel, BorderLayout.LINE_START);
     this.add(sigsPanel, BorderLayout.PAGE_END);

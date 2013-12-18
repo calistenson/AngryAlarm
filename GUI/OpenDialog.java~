@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+public class OpenDialog extends JDialog implements ActionListener {
+  
+  private JTextField textField;
+  
+  private JOptionPane optionPane;
+  
+}

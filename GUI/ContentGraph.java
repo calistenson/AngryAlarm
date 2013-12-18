@@ -23,7 +23,7 @@ public class ContentGraph {
     AffineCipher ac = new AffineCipher(9, 3, 3);
     quad = new Level(ac, "Content/Academic_Quad_1940.txt", "Academic Quad 1940", "Storm the tower First person to the top gets ice cream");
     tupelo = new Level(ac, "Content/Tupelo_Lane_May_1,_1940.txt", "Tupelo Lane May 1 1940", "Martha Attridge");
-    hoop = new Level(ac, "Content/Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos.");
+    hoop = new Level(ac, "Content/Cafè_Hoop_1981.txt", "Cafè Hoop 1981", "Make Nachos");
     tunnels = new Level(ac, "Content/Wellesley_Tunnels_1990.txt", "Wellesley Tunnels 1990", "Watch out there is asbestos");
     
     double[][] k = new double[2][2];
@@ -41,7 +41,7 @@ public class ContentGraph {
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);
     HillCipher hc = new HillCipher(key, shiftVal, keyInv);
-    clapp = new Level(hc, "Content/Clapp_Library.txt", "Clapp Library", "HI");
+    clapp = new Level(hc, "Content/Clapp_Library.txt", "Clapp Library", "GOOD LUCK ON FINALS");
     
     gameGraph = new AdjMatGraphPlus<Level>();
     gameGraph.addVertex(rome);
@@ -57,6 +57,10 @@ public class ContentGraph {
     gameGraph.addArc(rome, venice);
     gameGraph.addArc(tuscany, quad);
     gameGraph.addArc(tuscany, tupelo);
+    gameGraph.addArc(tuscany, hoop);
+    gameGraph.addArc(tuscany, tunnels);
+    gameGraph.addArc(venice, quad);
+    gameGraph.addArc(venice, tupelo);
     gameGraph.addArc(venice, hoop);
     gameGraph.addArc(venice, tunnels);
     gameGraph.addArc(quad, clapp);

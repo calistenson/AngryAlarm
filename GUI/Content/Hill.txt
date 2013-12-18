@@ -1,1 +1,10 @@
-<html>Herein lie the instructions for decrypting a hill cipher.
+<html>The Hill Cipher is encrypted and decrypted using matrices.
+Characters are encrypted in pairs with the function C = A*P + K (mod 26)
+where A is a 2x2 matrix, P is a 2x1 matrix (where each value is associated
+with a character you are either encrypting or decrypting), and K is a 2x1
+matrix with shift values. Characters are decrypted in pairs with the
+function P = B * (C-K) (mod 26) where B is A's inverse and and C and K
+are the same values as before.
+In our game A [0][0] = 9, A [0][1] = 6, A[1][0] = 6, A[1][1] = 5;
+K[0][0] = 0, K[1][0] = 0;
+and B[0][0] = 15, B[0][1] = 8, B[1][0] = 8, B[1][1] = 1.

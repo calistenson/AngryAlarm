@@ -19,12 +19,15 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.filechooser.FileFilter;
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage; 
 
 public class CodeCrackerInstructionsPanel extends JPanel {
   
   // instance vars
   private JButton caesarButton, vigButton, affineButton, hillButton, otherButton;
   private ImagePanel instructionsPanel;
+  private BufferedImage alphabetImage;
+  private JLabel alphabetLabel;
   
   // preferred sizes
   private final int WIDTH = 950, HEIGHT = 750;
@@ -42,34 +45,44 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     
     // create and stylize new componenets
     
+    //button for info for caesar cipher
     caesarButton = new JButton("");
     caesarButton.setOpaque(false);
     caesarButton.setContentAreaFilled(false);
     caesarButton.setBorderPainted(false);
     
+    //button for info for caesar cipher
     vigButton = new JButton("");
     vigButton.setOpaque(false);
     vigButton.setContentAreaFilled(false);
     vigButton.setBorderPainted(false);
     
+    //button for info for caesar cipher
     affineButton = new JButton("");
     affineButton.setOpaque(false);
     affineButton.setContentAreaFilled(false);
     affineButton.setBorderPainted(false);
     
+    //button for info for caesar cipher
     hillButton = new JButton("");
     hillButton.setOpaque(false);
     hillButton.setContentAreaFilled(false);
     hillButton.setBorderPainted(false);
     
-    CodeCrackerInstructionsPanelListener listener = new CodeCrackerInstructionsPanelListener();
-    caesarButton.addActionListener(listener);
+    CodeCrackerInstructionsPanelListener listener = new CodeCrackerInstructionsPanelListener(); //creates listener
+    //adds listener to buttons
+    caesarButton.addActionListener(listener); 
     vigButton.addActionListener(listener);
     affineButton.addActionListener(listener);
     hillButton.addActionListener(listener);
     
     // add everything to frame
     
+    //initializes 8 instances of other button
+    //sets invisible and then adds to frame
+    //this is for the purpose of allowed other four
+    //buttons to align with image
+    //these buttons have no functional purpose
     for (int x = 0; x < 8; x ++) {
       otherButton = new JButton("");
       otherButton.setOpaque(false);
@@ -85,6 +98,8 @@ public class CodeCrackerInstructionsPanel extends JPanel {
     
   }
   
+  
+  //Listener for CodeCrackerInstructionsPanel
   private class CodeCrackerInstructionsPanelListener implements ActionListener {
     
     public void actionPerformed(ActionEvent event) {
@@ -102,7 +117,10 @@ public class CodeCrackerInstructionsPanel extends JPanel {
         }
         try {
           String content = new Scanner(instructions).useDelimiter("\\A").next();
+          alphabetImage = ImageIO.read(new File("Images/alphabet.png"));
+          alphabetLabel = new JLabel(new ImageIcon(alphabetImage));
           JOptionPane.showMessageDialog(null, content);
+          JOptionPane.showMessageDialog(null, alphabetLabel, "Alphabet Key", JOptionPane.PLAIN_MESSAGE, null);
         } catch (IOException e) {
           System.out.println("**ERROR**: " + e);
         }

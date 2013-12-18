@@ -36,8 +36,7 @@ public class ContentGraph {
     Matrix shiftVal = new Matrix(shift);
     double[][] inv = new double[2][2]; 
     inv[0][0] = 15;
-    inv[0][
-           1] = 8;
+    inv[0][1] = 8;
     inv[1][0] = 8;
     inv[1][1] = 1;
     Matrix keyInv = new Matrix(inv);

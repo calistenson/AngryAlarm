@@ -1,3 +1,13 @@
+/**
+ * ImagePanel.java
+ * Authors: Clara Smith and Cali Stenson
+ * Date: December 8, 2013
+ *
+ * MODIFIED VERSION OF various code found online
+ *
+ * ImagePanel creates a JPanel with an image as the background
+ */
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;

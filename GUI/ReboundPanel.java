@@ -1,3 +1,15 @@
+/**
+ * ReboundPanel.java
+ * Authors: Clara Smith and Cali Stenson
+ * Date: December 8, 2013
+ *
+ * MODIFIED VERSION OF REBOUNDPANEL as found in CS 230 textbook
+ * 
+ * This class creates a specific type of JPanel in which image
+ * moves around panel and, when clicked, creates a message dialog
+ */
+
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

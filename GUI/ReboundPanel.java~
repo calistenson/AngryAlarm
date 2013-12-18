@@ -6,8 +6,8 @@ import javax.swing.event.*;
 
 public class ReboundPanel extends JPanel {
   
-  private final int WIDTH = 770, HEIGHT = 100;
-  private final int DELAY = 60, IMAGE_SIZE = 35;
+  private final int WIDTH = 770, HEIGHT = 150;
+  private final int DELAY = 60, IMAGE_SIZE = 120;
   
   private ImageIcon image, background;
   private Timer timer;
@@ -22,7 +22,7 @@ public class ReboundPanel extends JPanel {
     image = new ImageIcon ("Images/sigs.png");
     background = new ImageIcon ("Images/AboutBottom.png");
     
-    xButton = new JButton("     ");
+    xButton = new JButton("        ");
     xButton.setFont(new Font("Sans Serif", Font.PLAIN, 70));
     xButton.setOpaque(false);
     xButton.setContentAreaFilled(false);
@@ -31,7 +31,7 @@ public class ReboundPanel extends JPanel {
     this.add(xButton);
     
     x = 0;
-    y = 40;
+    y = 0;
     moveX = 3;
     moveY = 3;
     
@@ -44,7 +44,7 @@ public class ReboundPanel extends JPanel {
     page.drawImage(background.getImage(), 0, 0, null);
     super.paintComponent(page);
     image.paintIcon(this, page, x, y);
-    xButton.setLocation(x, y);
+    xButton.setLocation(x, y + 20);
   }
   
   private class ReboundListener implements ActionListener {

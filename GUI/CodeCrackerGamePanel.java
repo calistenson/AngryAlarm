@@ -26,7 +26,21 @@ import javax.imageio.ImageIO;
 
 public class CodeCrackerGamePanel extends JPanel {
   
-  // instance vars
+  
+  
+  /*
+   * INSTANCE VARIABLES
+   * CodeCracker game
+   * ContentGraph graph
+   * JLabel headerLabel, levelsLabel, instructLabel, messageLabel, detectiveLabel
+   * ImagePanel leftPanel, rightPanel
+   * JPanel labelPane, l1Pane, l2Pane, l3Pane, l4Pane, instructPane, messagePane, imagePane, submitPane
+   * JButton romeButton, tuscanyButton, veniceButton, quadButton, tupeloButton, hoopButton, tunnelsButton, clappButton, submitButton
+   * JScrollPane storyPane
+   * JTextField submitText
+   * JTextArea storyText
+   * BufferedImage detectiveImage
+   */
   private CodeCracker game;
   private ContentGraph graph;
   // for top
@@ -49,7 +63,10 @@ public class CodeCrackerGamePanel extends JPanel {
   // preferred sizes
   private final int WIDTH = 950, HEIGHT = 750;
   
-  // constructor
+  /* CONSTRUCTOR
+   * @param c - instance of CodeCracker game
+   * @param l - instance of ContentGraph of levels of game
+   */
   public CodeCrackerGamePanel (CodeCracker c, ContentGraph l) {
     
     game = c;
@@ -72,10 +89,8 @@ public class CodeCrackerGamePanel extends JPanel {
     leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
     leftPanel.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 4));
     leftPanel.setBackground(new Color(76, 168, 194));
+    
     // creates panes
-    //labelPane = new JPanel();
-    //labelPane.setOpaque(false);
-    //labelPane.setSize(new Dimension(415, 40));
     l1Pane = new JPanel();
     l1Pane.setOpaque(false);
     l2Pane = new JPanel();
@@ -84,12 +99,15 @@ public class CodeCrackerGamePanel extends JPanel {
     l3Pane.setOpaque(false);
     l4Pane = new JPanel();
     l4Pane.setOpaque(false);
+    
+
     // creates componenets for left panel
     levelsLabel = new JLabel(" ");
     levelsLabel.setPreferredSize(new Dimension(415, 60));
     levelsLabel.setFont(new Font("Sans Serif", Font.PLAIN, 60));
     levelsLabel.setForeground(new Color(76, 168, 194));
-    //System.out.println("LEVELS LABEL: " + levelsLabel.toString());
+    
+    // creates buttons and sets formatting for buttons
     romeButton = new JButton("Ancient Rome");
     romeButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
     romeButton.setPreferredSize(new Dimension(200, 100));
@@ -115,6 +133,7 @@ public class CodeCrackerGamePanel extends JPanel {
     clappButton.setFont(new Font("Sans Serif", Font.PLAIN, 16));
     clappButton.setPreferredSize(new Dimension(200, 100));
     
+    // creates array list of buttons and adds all the buttons to the array list
     ArrayList<JButton> levelButtons = new ArrayList<JButton>();
     levelButtons.add(romeButton);
     levelButtons.add(tuscanyButton);
@@ -125,6 +144,7 @@ public class CodeCrackerGamePanel extends JPanel {
     levelButtons.add(tunnelsButton);
     levelButtons.add(clappButton);
     
+    // loops through arraylist levelButtons and makes them all invisible
     for (JButton j : levelButtons) {
       j.setOpaque(false);
       j.setContentAreaFilled(false);
@@ -142,8 +162,8 @@ public class CodeCrackerGamePanel extends JPanel {
     hoopButton.addActionListener(listener);
     tunnelsButton.addActionListener(listener);
     clappButton.addActionListener(listener);
+    
     // adds panes
-    //labelPane.add(levelsLabel);
     l1Pane.add(romeButton);
     l2Pane.add(tuscanyButton);
     l2Pane.add(veniceButton);
@@ -159,6 +179,7 @@ public class CodeCrackerGamePanel extends JPanel {
     leftPanel.add(l3Pane);
     leftPanel.add(l4Pane);
     
+    
     // creates right panel
     // nests Box Layout within panes of Flow Layout
    
@@ -170,7 +191,7 @@ public class CodeCrackerGamePanel extends JPanel {
     // creates componenets for right panel
     instructPane = new JPanel();
     
-    
+    //creates label for instructions
     instructLabel = new JLabel("<html><strong>Current level: " + game.getCurrent().getName() + "</strong>. Read the storyline and click on the " 
                                  + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
                                  + "for more info on how to decrypt the cipher.</html>");
@@ -178,53 +199,52 @@ public class CodeCrackerGamePanel extends JPanel {
     instructPane.add(instructLabel);
     
     storyText = new JTextArea(7, 42);
+    
+    // gets story text from appropriate text file
     try {
       String content = new Scanner(graph.getRome().getStoryLine()).useDelimiter("\\A").next();
       storyText.setText(content);
       storyText.setLineWrap(true);
-    } catch (IOException e) {
+      storyText.setWrapStyleWord(true);
+    } catch (IOException e) { //catches IOException
       System.out.println("***ALERT***  Could not find or read from file! Error: " + e);
     }
+    
+    // sets the storypane to a JScrollPane of the story text
     storyPane = new JScrollPane(storyText);
     storyText.setEditable(false);
     storyText.setBackground(new Color(76, 168, 194));
     storyPane.setBorder(BorderFactory.createEmptyBorder(0, 3, 3, 3));
     
+    // creates the messge pane with the specific encrypted message
     messagePane = new JPanel();
     messageLabel = new JLabel("<html><strong>Encrypted message</strong>:<br>" + graph.getRome().getCipher().encrypt(graph.getRome().getMessage()) + "</html>");
     messagePane.add(messageLabel);
-    
-    imagePane = new JPanel();
-    try {
-      detectiveImage = ImageIO.read(new File("Images/submitwoman.png"));
-      detectiveLabel = new JLabel(new ImageIcon(detectiveImage));
-      imagePane.add(detectiveLabel);
-    } catch (IOException e) {
-      System.out.println("***ALERT***  Could not read or display image! Error: " + e);
-    }
       
+    // creates the submit pane, in which the user can type in and submit the decrypted message
     submitPane = new JPanel();
     submitText = new JTextField(40);
+    submitText.addKeyListener(listener);
     submitButton = new JButton("Submit");
     submitButton.addActionListener(listener);
     submitPane.add(submitText);
     submitPane.add(submitButton);
     
+    // sets all the individual pane so everything except the componenets are see through
     instructPane.setOpaque(false);
     storyPane.setOpaque(false);
     messagePane.setOpaque(false);
     imagePane.setOpaque(false);
     submitPane.setOpaque(false);
     
-    //instructPane.setPreferredSize(new Dimension(509, 70));
+    // sets the dimensions of the story pane
     storyPane.setSize(new Dimension(509, 150));
-    //messagePane.setPreferredSize(new Dimension(509, 20));
-        
+       
+    //adds the individual panes to the right panel
     rightPanel.add(instructPane);
     rightPanel.add(storyPane);
     rightPanel.add(messagePane);
     rightPanel.add(Box.createRigidArea(new Dimension(0,240)));
-    //rightPanel.add(imagePane);
     rightPanel.add(submitPane);
     rightPanel.add(Box.createRigidArea(new Dimension(0,80)));
     
@@ -236,16 +256,15 @@ public class CodeCrackerGamePanel extends JPanel {
   }
   
   
-  private class CodeCrackerGamePanelListener implements ActionListener {
+  private class CodeCrackerGamePanelListener implements ActionListener, KeyListener {
     
     public void actionPerformed(ActionEvent event) {
       JButton b = new JButton();
-      b = (JButton)event.getSource();
+      b = (JButton)event.getSource(); //just for easier readability
       if (b == submitButton) {
-        if (game.playLevel(submitText.getText()) && game.getCurrent() ==  ) {
-          
+        if (game.playLevel(submitText.getText()) && game.getCurrent().getName().equals("Clapp Library")) {
+          JOptionPane.showMessageDialog(null, "Congrats! You have completed the game!");
         }
-        System.out.println("Wooh! You submitted!");
         else if (game.playLevel(submitText.getText())) {
           JOptionPane.showMessageDialog(null, "Congrats! You have completed this level!");
         }
@@ -308,10 +327,13 @@ public class CodeCrackerGamePanel extends JPanel {
           } 
         } 
       }
-      this.updateMap();
+      this.updateMap(); //makes it so it looks like the "button" (artificially create through an image) is chosen
     }
     
-    
+    /* public void method updateMap
+     * method updates the map image in order to make it appear 
+     * as though the current level is selected as a button
+     */
     public void updateMap() {
       String s = game.getCurrent().getName();
       if (s.equals("Ancient Rome")) leftPanel.setImage("Images/mapRome.png");
@@ -325,8 +347,41 @@ public class CodeCrackerGamePanel extends JPanel {
       else leftPanel.setImage("Images/map.png");
     }
     
+    /* public void method keyPressed
+     * @param e KeyEvent - a key event from user's keyboard
+     * makes it so that user can press "enter" key when submitting the decrypted message 
+     * and it will act the same as clicking "submit" button
+     */
+    public void keyPressed(KeyEvent e) {
+      if (e.getKeyCode()==KeyEvent.VK_ENTER){
+        //System.out.println("Wooh! You submitted!");
+        if (game.playLevel(submitText.getText()) && game.getCurrent().getName().equals("Clapp Library")) {
+          JOptionPane.showMessageDialog(null, "Congrats! You have completed the game!");
+        }
+        else if (game.playLevel(submitText.getText())) {
+          JOptionPane.showMessageDialog(null, "Congrats! You have completed this level!");
+        }
+        else JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
+      }   
+    }
     
-    // sets center panel to Level l's info
+    /* neccessary to overrid when implementing KeyListener
+     * taken care of in keyPressed() method
+     */
+    public void keyReleased(KeyEvent e) {
+    }
+    
+    /* neccessary to overrid when implementing KeyListener
+     * taken care of in keyPressed() method
+     */
+    public void keyTyped(KeyEvent e) {
+    }
+    
+    
+    /* public void method changeLevel
+     * @param l Level - level to change information to
+     * sets center panel to Level l's info
+     */
     public void changeLevel(Level l) {
       System.out.println("Setting center (viewed as right) panel to next level's info.");
       try {
@@ -337,7 +392,6 @@ public class CodeCrackerGamePanel extends JPanel {
                                  + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
                                  + "for more info on how to decrypt the cipher.</html>");
         messageLabel.setText("<html><strong>Encrypted message</strong>:<br>" + game.codedMessage(game.getCurrent()) + "</html>");
-        //graph.getRome().getCipher().encrypt(graph.getRome().getMessage())
         System.out.println("Current level: " + game.getCurrent() + "\n" + "Encrypted message: " + game.codedMessage(game.getCurrent()));
       } catch (IOException e) {
         System.out.print("***ATTENTION***: COULD NOT READ NEXT LEVEL'S STORY LINE FROM FILE. \n ERROR: " + e);
