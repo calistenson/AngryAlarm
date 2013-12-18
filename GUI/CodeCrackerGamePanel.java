@@ -191,7 +191,7 @@ public class CodeCrackerGamePanel extends JPanel {
     storyPane.setBorder(BorderFactory.createEmptyBorder(0, 3, 3, 3));
     
     messagePane = new JPanel();
-    messageLabel = new JLabel("<html><strong>Encrypted message</strong>: " + graph.getRome().getCipher().encrypt(graph.getRome().getMessage()) + "</html>");
+    messageLabel = new JLabel("<html><strong>Encrypted message</strong>:<br>" + graph.getRome().getCipher().encrypt(graph.getRome().getMessage()) + "</html>");
     messagePane.add(messageLabel);
     
     imagePane = new JPanel();
@@ -223,7 +223,7 @@ public class CodeCrackerGamePanel extends JPanel {
     rightPanel.add(instructPane);
     rightPanel.add(storyPane);
     rightPanel.add(messagePane);
-    rightPanel.add(Box.createRigidArea(new Dimension(0,250)));
+    rightPanel.add(Box.createRigidArea(new Dimension(0,240)));
     //rightPanel.add(imagePane);
     rightPanel.add(submitPane);
     rightPanel.add(Box.createRigidArea(new Dimension(0,80)));
@@ -242,9 +242,12 @@ public class CodeCrackerGamePanel extends JPanel {
       JButton b = new JButton();
       b = (JButton)event.getSource();
       if (b == submitButton) {
+        if (game.playLevel(submitText.getText()) && game.getCurrent() == ) {
+          
+        }
         System.out.println("Wooh! You submitted!");
-        if (game.playLevel(submitText.getText())) {
-          JOptionPane.showMessageDialog(null, "Congrats! You have completed this level and can now continue onto the next level.");
+        else if (game.playLevel(submitText.getText())) {
+          JOptionPane.showMessageDialog(null, "Congrats! You have completed this level!");
         }
         else JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
       } else if (b == romeButton) {
@@ -333,7 +336,7 @@ public class CodeCrackerGamePanel extends JPanel {
         instructLabel.setText("<html><strong>Current level: " + game.getCurrent().getName() + "</strong>. Read the storyline and click on the " 
                                  + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
                                  + "for more info on how to decrypt the cipher.</html>");
-        messageLabel.setText("<html><strong>Encrypted message</strong>: " + game.codedMessage(game.getCurrent()) + "</html>");
+        messageLabel.setText("<html><strong>Encrypted message</strong>:<br>" + game.codedMessage(game.getCurrent()) + "</html>");
         //graph.getRome().getCipher().encrypt(graph.getRome().getMessage())
         System.out.println("Current level: " + game.getCurrent() + "\n" + "Encrypted message: " + game.codedMessage(game.getCurrent()));
       } catch (IOException e) {
