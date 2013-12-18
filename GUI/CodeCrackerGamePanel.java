@@ -242,7 +242,7 @@ public class CodeCrackerGamePanel extends JPanel {
       JButton b = new JButton();
       b = (JButton)event.getSource();
       if (b == submitButton) {
-        if (game.playLevel(submitText.getText()) && game.getCurrent() == ) {
+        if (game.playLevel(submitText.getText()) && game.getCurrent() ==  ) {
           
         }
         System.out.println("Wooh! You submitted!");
