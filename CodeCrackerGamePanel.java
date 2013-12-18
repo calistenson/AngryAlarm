@@ -100,7 +100,7 @@ public class CodeCrackerGamePanel extends JPanel {
     l4Pane = new JPanel();
     l4Pane.setOpaque(false);
     
-
+    
     // creates componenets for left panel
     levelsLabel = new JLabel(" ");
     levelsLabel.setPreferredSize(new Dimension(415, 60));
@@ -182,7 +182,7 @@ public class CodeCrackerGamePanel extends JPanel {
     
     // creates right panel
     // nests Box Layout within panes of Flow Layout
-   
+    
     rightPanel = new ImagePanel(new ImageIcon("Images/Submit.png").getImage());
     rightPanel.setPreferredSize(new Dimension(523, 700));
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
@@ -220,7 +220,7 @@ public class CodeCrackerGamePanel extends JPanel {
     messagePane = new JPanel();
     messageLabel = new JLabel("<html><strong>Encrypted message</strong>:<br>" + graph.getRome().getCipher().encrypt(graph.getRome().getMessage()) + "</html>");
     messagePane.add(messageLabel);
-      
+    
     // creates the submit pane, in which the user can type in and submit the decrypted message
     submitPane = new JPanel();
     submitText = new JTextField(40);
@@ -229,6 +229,9 @@ public class CodeCrackerGamePanel extends JPanel {
     submitButton.addActionListener(listener);
     submitPane.add(submitText);
     submitPane.add(submitButton);
+    
+    restartButton = new JButton ("Restart Game");
+    restartButton.addActionListener(listener);
     
     // sets all the individual pane so everything except the componenets are see through
     instructPane.setOpaque(false);
@@ -239,14 +242,15 @@ public class CodeCrackerGamePanel extends JPanel {
     
     // sets the dimensions of the story pane
     storyPane.setSize(new Dimension(509, 150));
-       
+    
     //adds the individual panes to the right panel
     rightPanel.add(instructPane);
     rightPanel.add(storyPane);
     rightPanel.add(messagePane);
     rightPanel.add(Box.createRigidArea(new Dimension(0,240)));
     rightPanel.add(submitPane);
-    rightPanel.add(Box.createRigidArea(new Dimension(0,80)));
+    rightPanel.add(Box.createRigidArea(new Dimension(0,50)));
+    rightPanel.add(restartButton);
     
     
     // adds everything to GUI
@@ -261,7 +265,12 @@ public class CodeCrackerGamePanel extends JPanel {
     public void actionPerformed(ActionEvent event) {
       JButton b = new JButton();
       b = (JButton)event.getSource(); //just for easier readability
-      if (b == submitButton) {
+      if (b == restartButton) {
+        game.reset();
+        leftPanel.setImage("Images/mapRome.png");
+        System.out.println("Restarting game............");
+      }
+      else if (b == submitButton) {
         if (game.playLevel(submitText.getText()) && game.getCurrent().getName().equals("Clapp Library")) {
           JOptionPane.showMessageDialog(null, "Congrats! You have completed the game!");
         }
@@ -276,52 +285,52 @@ public class CodeCrackerGamePanel extends JPanel {
         String message = (String)JOptionPane.showInputDialog("Please input the decrypted message from the previous level");
         if (b == tuscanyButton) {
           if (game.chooseNewLevel(graph.getTuscany())) {
-              changeLevel(graph.getTuscany());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
-            }
-           else {
+            changeLevel(graph.getTuscany());
+            JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
+          }
+          else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           }
         } else if (b == veniceButton) {
           if (game.chooseNewLevel(graph.getVenice())) {
-              changeLevel(graph.getVenice());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
+            changeLevel(graph.getVenice());
+            JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
             
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           }
         } else if (b == quadButton) {
           if (game.chooseNewLevel(graph.getQuad())) {
-              changeLevel(graph.getQuad());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
+            changeLevel(graph.getQuad());
+            JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
         } else if (b == tupeloButton) {
           if (game.chooseNewLevel(graph.getTupelo())) {
-              changeLevel(graph.getTupelo());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
+            changeLevel(graph.getTupelo());
+            JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
         } else if (b == hoopButton) {
           if (game.chooseNewLevel(graph.getHoop())) {
-              changeLevel(graph.getHoop());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
+            changeLevel(graph.getHoop());
+            JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
         } else if (b == tunnelsButton) {
           if (game.chooseNewLevel(graph.getTunnels())) {
-              changeLevel(graph.getTunnels());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
+            changeLevel(graph.getTunnels());
+            JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           }  
         } else if (b == clappButton) {
           if (game.chooseNewLevel(graph.getClapp())) {
-              changeLevel(graph.getClapp());
-              JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
+            changeLevel(graph.getClapp());
+            JOptionPane.showMessageDialog(null, "Congrats! You have completed the past level and can now continue onto the next level.");
           } else {
             JOptionPane.showMessageDialog(null, "Sorry, your message was incorrect. Please try again.");
           } 
@@ -389,8 +398,8 @@ public class CodeCrackerGamePanel extends JPanel {
         storyText.setText(content);
         storyText.setBackground(new Color(76, 168, 194));
         instructLabel.setText("<html><strong>Current level: " + game.getCurrent().getName() + "</strong>. Read the storyline and click on the " 
-                                 + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
-                                 + "for more info on how to decrypt the cipher.</html>");
+                                + game.getCurrent().getCipher().getType() + " button in the instructions pane " 
+                                + "for more info on how to decrypt the cipher.</html>");
         messageLabel.setText("<html><strong>Encrypted message</strong>:<br>" + game.codedMessage(game.getCurrent()) + "</html>");
         System.out.println("Current level: " + game.getCurrent() + "\n" + "Encrypted message: " + game.codedMessage(game.getCurrent()));
       } catch (IOException e) {

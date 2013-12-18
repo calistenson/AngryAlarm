@@ -125,9 +125,11 @@ public class CodeCracker {
    * @return Level
    * Returns the current level the user is playing
    */ 
-  public Level getCurrent() {
-    return current;
+  public void reset() {
+    this.current = levels.allSources().get(0);
+    this.levelAccomplished = false;
   }
+  
   
   /**
    * main()
