@@ -57,7 +57,7 @@ public class CodeCrackerGamePanel extends JPanel {
   private JLabel instructLabel, messageLabel;
   private JTextField submitText;
   private JTextArea storyText;
-  private JButton submitButton;
+  private JButton submitButton, restartButton;
   private BufferedImage detectiveImage;
   private JLabel detectiveLabel;
   // preferred sizes

@@ -125,10 +125,19 @@ public class CodeCracker {
    * @return Level
    * Returns the current level the user is playing
    */ 
+  public Level getCurrent() {
+    return current;
+  }
+  
+  /**
+   * reset()
+   * resets everything to initial state for new game
+   */
   public void reset() {
     this.current = levels.allSources().get(0);
     this.levelAccomplished = false;
   }
+  
   
   
   /**
